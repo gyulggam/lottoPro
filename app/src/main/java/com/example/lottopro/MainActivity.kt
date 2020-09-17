@@ -16,9 +16,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val sPageMoveBtn = findViewById<Button>(R.id.moveBtn) as Button
+        var sNextIntent = Intent()
 
         sPageMoveBtn.setOnClickListener{
-            val sNextIntent = Intent(this@MainActivity, SelectNumActivity::class.java)
+            sNextIntent = Intent(this@MainActivity, SelectLottoActivity::class.java)
             startActivity(sNextIntent)
         }
     }
