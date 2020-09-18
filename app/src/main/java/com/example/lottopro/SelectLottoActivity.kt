@@ -14,10 +14,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
-import androidx.core.view.marginLeft
-import androidx.core.view.marginRight
 import kotlinx.android.synthetic.main.select_lotto.*
 import timber.log.Timber
+import java.util.*
 
 class SelectLottoActivity : AppCompatActivity() {
 
@@ -26,7 +25,8 @@ class SelectLottoActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree())
         setContentView(R.layout.select_lotto)
 
-        val sMaxLottoNum = 46
+        var sMaxLottoNum = 46
+        var sSelLotto = mutableListOf<Int>()
 
         linearLayout1.margin(0F, 10F, 0F, 0F)
         linearLayout2.margin(0F, 10F, 0F, 0F)
@@ -42,59 +42,70 @@ class SelectLottoActivity : AppCompatActivity() {
         linearLayout12.margin(0F, 10F, 0F, 0F)
 
         for (i in 1 until sMaxLottoNum) {
-            val sBtn = Button(this).apply {
+             var sIsClick = false
+             val sBtn = Button(this).apply {
                 text = i.toString()
                 width = dpToPx(85F)
                 height = dpToPx(85F)
+
+                setOnClickListener {
+                    if(sIsClick) {
+                        this.setBackgroundResource(R.drawable.button_shape)
+                        sSelLotto.drop(i-1)
+                        sIsClick = false
+                    } else {
+                        when {
+                            i < 11 -> this.setBackgroundResource(R.drawable.lotto_num1)
+                            i < 21 -> this.setBackgroundResource(R.drawable.lotto_num10)
+                            i < 31 -> this.setBackgroundResource(R.drawable.lotto_num20)
+                            i < 41 -> this.setBackgroundResource(R.drawable.lotto_num30)
+                            else-> this.setBackgroundResource(R.drawable.lotto_num40)
+                        }
+
+                        sSelLotto.add(i.toInt())
+                        sIsClick = true
+                    }
+                    Log.d("Select Lotto", sSelLotto.toString())
+                }
             }
+
+            sBtn.setBackgroundResource(R.drawable.button_shape)
 
             when {
                 i < 5 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout1.addView(sBtn)
                 }
                 i < 9 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout2.addView(sBtn)
                 }
                 i < 13 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout3.addView(sBtn)
                 }
                 i < 17 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout4.addView(sBtn)
                 }
                 i < 21 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout5.addView(sBtn)
                 }
                 i < 25 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout6.addView(sBtn)
                 }
                 i < 29 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout7.addView(sBtn)
                 }
                 i < 33 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout8.addView(sBtn)
                 }
                 i < 37 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout9.addView(sBtn)
                 }
                 i < 41 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout10.addView(sBtn)
                 }
                 i < 45 -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout11.addView(sBtn)
                 }
                 else -> {
-                    sBtn.setBackgroundResource(R.drawable.button_shape)
                     linearLayout12.addView(sBtn)
                 }
             }

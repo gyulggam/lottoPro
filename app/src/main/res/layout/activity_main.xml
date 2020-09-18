@@ -17,8 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/menuBtn1"
             android:layout_width="378dp"
@@ -34,7 +32,6 @@
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,10 +64,9 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/constellation" />
-
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/menuBtn2"
             android:layout_width="match_parent"
@@ -115,8 +111,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuBtn3"
             tools:ignore="MissingConstraints" />
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
