@@ -25,8 +25,9 @@ class SelectLottoActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree())
         setContentView(R.layout.select_lotto)
 
-        var sMaxLottoNum = 46
-        var sSelLotto = mutableListOf<Int>()
+        var gMaxSelLotto = 6
+        var gMaxLottoNum = 46
+        var gSelLotto = mutableListOf<Int>()
 
         linearLayout1.margin(0F, 10F, 0F, 0F)
         linearLayout2.margin(0F, 10F, 0F, 0F)
@@ -41,19 +42,21 @@ class SelectLottoActivity : AppCompatActivity() {
         linearLayout11.margin(0F, 10F, 0F, 0F)
         linearLayout12.margin(0F, 10F, 0F, 0F)
 
-        for (i in 1 until sMaxLottoNum) {
-             var sIsClick = false
-             val sBtn = Button(this).apply {
+        for (i in 1 until gMaxLottoNum) {
+            var sIsClick = false
+            val sBtn = Button(this).apply {
                 text = i.toString()
                 width = dpToPx(85F)
                 height = dpToPx(85F)
 
-                setOnClickListener {
+                this.setOnClickListener {
                     if(sIsClick) {
                         this.setBackgroundResource(R.drawable.button_shape)
-                        sSelLotto.drop(i-1)
+                        gSelLotto.remove(i)
                         sIsClick = false
                     } else {
+                        if (gMaxSelLotto === gSelLotto.size) return@setOnClickListener
+
                         when {
                             i < 11 -> this.setBackgroundResource(R.drawable.lotto_num1)
                             i < 21 -> this.setBackgroundResource(R.drawable.lotto_num10)
@@ -62,10 +65,11 @@ class SelectLottoActivity : AppCompatActivity() {
                             else-> this.setBackgroundResource(R.drawable.lotto_num40)
                         }
 
-                        sSelLotto.add(i.toInt())
+                        gSelLotto.add(i.toInt())
                         sIsClick = true
                     }
-                    Log.d("Select Lotto", sSelLotto.toString())
+
+                    Log.d("Select Lotto", gSelLotto.toString())
                 }
             }
 
