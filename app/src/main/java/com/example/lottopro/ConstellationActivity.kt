@@ -13,7 +13,5 @@ class ConstellationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_constellation)
 
         Toast.makeText(applicationContext, "광고수입 호로록", Toast.LENGTH_LONG).show();
-
-
     }
 }

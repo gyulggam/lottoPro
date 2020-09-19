@@ -10,8 +10,8 @@
         android:bottom="0dp"
         />
     <size
-        android:width="5dp"
-        android:height="5dp"
+        android:width="55dp"
+        android:height="55dp"
         />
     <solid
         android:color="#F18D80"
