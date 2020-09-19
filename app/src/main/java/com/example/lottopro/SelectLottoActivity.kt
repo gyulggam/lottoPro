@@ -91,7 +91,7 @@ class SelectLottoActivity : AppCompatActivity() {
     }
 
     private fun saveBtn(gSelLotto: MutableList<Int>) {
-        if (gSelLotto.size < 5) {
+        if (gSelLotto.size < 6) {
             Toast.makeText(applicationContext, "6개 번호를 선택해야 합니다.", Toast.LENGTH_LONG).show();
         }
     }
