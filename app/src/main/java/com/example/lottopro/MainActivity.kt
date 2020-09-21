@@ -26,13 +26,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         menuBtn2.setOnClickListener{
-//            val sIntent = Intent(this@MainActivity, ConstellationActivity::class.java  )
-//            startActivity(intent);
-
+//            val sIntent = Intent(this@MainActivity, ScrollingActivity::class.java  )
+//            startActivity(sIntent);
         }
         menuBtn3.setOnClickListener{
 //            val sIntent = Intent(this@MainActivity, ConstellationActivity::class.java  )
-//            startActivity(intent);
+//            startActivity(sIntent);
 
         }
         menuBtn4.setOnClickListener{

@@ -1,11 +1,6 @@
 package com.example.lottopro
 
-import android.app.ActionBar
-import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
-import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +11,13 @@ import android.view.ViewGroup
 import android.widget.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import timber.log.Timber
-import java.util.*
 
 class SelectLottoActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree())
-        setContentView(R.layout.select_lotto)
+
+        setContentView(R.layout.activity_select_lotto)
 
         var gMaxSelLotto = 6
         var gMaxLottoNum = 46
@@ -93,6 +87,8 @@ class SelectLottoActivity : AppCompatActivity() {
     private fun saveBtn(gSelLotto: MutableList<Int>) {
         if (gSelLotto.size < 6) {
             Toast.makeText(applicationContext, "6개 번호를 선택해야 합니다.", Toast.LENGTH_LONG).show();
+        } else {
+
         }
     }
 
