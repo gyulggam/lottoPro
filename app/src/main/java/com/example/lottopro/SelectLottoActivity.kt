@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import timber.log.Timber
 
@@ -30,6 +31,8 @@ class SelectLottoActivity : AppCompatActivity() {
         lottoGridLayout.columnCount = gMaxCol
         lottoGridLayout.rowCount = gMaxRow
         saveBtn.text = "번호 저장"
+
+        lottoGrid.adapter = ButtonAdapter(this)
 
         for (i in 1 until gMaxLottoNum) {
             var sIsClick = false
