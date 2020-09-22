@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.DatePicker
@@ -19,8 +20,11 @@ class ConstellationActivity : AppCompatActivity() {
 
 //        로또 번호 확인 버튼의 클릭이벤트 리스너 설정
         goResultButton.setOnClickListener{
+            Toast.makeText(applicationContext, "test", Toast.LENGTH_SHORT).show()
 
-        }
+        println("난수 생성 type1!!!!!!!!!!!!!!!!!!!!!!! " +LottoNumberMaker.getRandomLottoNumbers())
+
+    }
 /* 현재 DatePicker 의 월, 일 정보로 별자리 텍스트 변경 */
         textView.setText(makeConstellationString(datePicker.month, datePicker.dayOfMonth))
 //        DatePicker 의  날짜가 변화하면 별자리를 보여주는 텍스트뷰도 변경
