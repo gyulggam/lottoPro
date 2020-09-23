@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.DatePicker
-import android.widget.Toast
+import android.view.Gravity
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_constellation.*
+import kotlinx.android.synthetic.main.select_lotto.*
 import java.util.*
 
 class ConstellationActivity : AppCompatActivity() {
@@ -20,9 +19,26 @@ class ConstellationActivity : AppCompatActivity() {
 
 //        로또 번호 확인 버튼의 클릭이벤트 리스너 설정
         goResultButton.setOnClickListener{
-            Toast.makeText(applicationContext, "test", Toast.LENGTH_SHORT).show()
+            GridLayoutLayout3.removeAllViewsInLayout()
+        var array = LottoNumberMaker.getRandomLottoNumbers()
 
-        println("난수 생성 type1!!!!!!!!!!!!!!!!!!!!!!! " +LottoNumberMaker.getRandomLottoNumbers())
+        for (i in 1.. 6) {
+            GridLayoutLayout3.columnCount = 6
+            GridLayoutLayout3.rowCount = 1
+            val sCol: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            val sRow: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            var sGridParam: GridLayout.LayoutParams
+            val sBall = "ball_"+array[i-1]
+            val sBtn = ImageButton(this)
+//            sBtn.setBackgroundResource(R.drawable.ball_1)
+            sBtn.setBackgroundResource(resources.getIdentifier(sBall,"drawable", packageName))
+            sBtn.foregroundGravity = Gravity.CENTER_HORIZONTAL
+
+            sGridParam = GridLayout.LayoutParams(sRow, sCol)
+            GridLayoutLayout3.addView(sBtn, sGridParam)
+
+        }
+
 
     }
 /* 현재 DatePicker 의 월, 일 정보로 별자리 텍스트 변경 */
@@ -41,7 +57,11 @@ class ConstellationActivity : AppCompatActivity() {
 
         })
 
+//       로또번호저장 버튼의 클릭이벤트 리스너 설정
+        goSaveButton.setOnClickListener{
+            Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
 
+        }
     }
 
     //        전달받은 월정보, 일정보 기준으로 별자리를 반환한다.
