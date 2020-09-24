@@ -3,10 +3,6 @@ package com.example.lottopro
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.TextView
-import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
@@ -26,8 +22,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         menuBtn2.setOnClickListener{
-//            val sIntent = Intent(this@MainActivity, ScrollingActivity::class.java  )
-//            startActivity(sIntent);
+            val sIntent = Intent(this@MainActivity, RandomLottoActivity::class.java  )
+            startActivity(sIntent);
         }
         menuBtn3.setOnClickListener{
 //            val sIntent = Intent(this@MainActivity, ConstellationActivity::class.java  )

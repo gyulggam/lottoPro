@@ -20,6 +20,7 @@
         <activity android:name=".SelectLottoActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ConstellationActivity" />
+        <activity android:name=".RandomLottoActivity" />
     </application>
 
 </manifest>
