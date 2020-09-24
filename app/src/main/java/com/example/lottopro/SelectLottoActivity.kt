@@ -106,6 +106,7 @@ class SelectLottoActivity : AppCompatActivity() {
     }
 
     private fun refreshData() {
+        toolLottoLay.removeAllViews()
         gLottoList = gDb.gAllLottoNum
         for ((index, value) in gLottoList.withIndex()) {
             lateinit var sLottoList : Array<String>
