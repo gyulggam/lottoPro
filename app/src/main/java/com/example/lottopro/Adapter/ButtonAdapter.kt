@@ -1,15 +1,16 @@
-package com.example.lottopro
+package com.example.lottopro.Adapter
 
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
+import com.example.lottopro.Str.LottoNum
 
 
-class ButtonAdapter(private val aContext: Context) : BaseAdapter() {
-    private var sBtnId = 0
+class ButtonAdapter(private val aContext: Context, internal val aLottoNum: Array<String>) : BaseAdapter() {
     private val sTotalBtn = 6
 
     override fun getCount(): Int {
@@ -25,14 +26,16 @@ class ButtonAdapter(private val aContext: Context) : BaseAdapter() {
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
-        val sBtn: Button
+        val sBtn: ImageButton
+        var sBall = "ball_${aLottoNum[i]}"
 
         if (view == null) {
-            sBtn = Button(aContext)
-            sBtn.text = "Button " + ++sBtnId
+            sBtn = ImageButton(aContext)
+            sBtn.setBackgroundResource(aContext.resources.getIdentifier(sBall,"drawable", aContext.packageName))
         } else {
-            sBtn = view as Button
+            sBtn = view as ImageButton
         }
+
         sBtn.setOnClickListener { v ->
             Toast.makeText(
                 v.context,
