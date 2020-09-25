@@ -1,6 +1,7 @@
 package com.example.lottopro
 
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,16 +9,23 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.*
 import android.widget.*
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
+import androidx.core.view.marginLeft
 import kotlinx.android.synthetic.main.select_lotto.*
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import timber.log.Timber
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Str.LottoNum
+import java.util.Collections
 
 class SelectLottoActivity : AppCompatActivity() {
     internal lateinit var  gDb:SqlHelper
     internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
+    private var gSelLotto = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +38,6 @@ class SelectLottoActivity : AppCompatActivity() {
 
         var gMaxSelLotto = 6
         var gMaxLottoNum = 46
-        var gSelLotto = mutableListOf<Int>()
         var gMaxCol = 7
         var gMaxRow = 7
 
@@ -80,41 +87,56 @@ class SelectLottoActivity : AppCompatActivity() {
         }
 
         saveBtn.setOnClickListener {
-            saveBtn(gSelLotto)
+            saveBtn()
         }
     }
 
-    private fun saveBtn(aSelLotto: MutableList<Int>) {
-        if (aSelLotto.size < 6) {
+    private fun saveBtn() {
+        if (gSelLotto.size < 6) {
             Toast.makeText(applicationContext, "6개 번호를 선택해야 합니다.", Toast.LENGTH_LONG).show();
             return
         }
-        val sStrArray = aSelLotto.map{ it.toString() }.toTypedArray()
+
+        gSelLotto.sort()
+
+        val sStrArray = gSelLotto.map{ it.toString() }.toTypedArray()
         val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
+
         gDb.addLottoNum(sLottoNum)
-        refreshData()
-    }
-
-    private fun dbReset(aSelLotto: MutableList<Int>) {
-        val sStrArray = aSelLotto.map{ it.toString() }.toTypedArray()
-
-        for (i in 0..gLottoList.size) {
-            val sLottoNum = LottoNum(i, sStrArray.joinToString(","))
-            gDb.deleteLottoNum(sLottoNum)
-        }
         refreshData()
     }
 
     private fun refreshData() {
         toolLottoLay.removeAllViews()
         gLottoList = gDb.gAllLottoNum
+        val sDelBtn = Button(this)
+        val sDelBtnPam =  LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+        toolLottoLay.margin(20F,0F,20F,10F)
+
+        sDelBtnPam.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
+        sDelBtnPam.topMargin = 30
+
+        sDelBtn.layoutParams = sDelBtnPam
+        sDelBtn.text = "전체 삭제"
+        sDelBtn.gravity = Gravity.CENTER
+        sDelBtn.background = ContextCompat.getDrawable(this,R.drawable.save_button)
+        sDelBtn.setTextColor(Color.parseColor("#ffffff"))
+
+        sDelBtn.setOnClickListener {
+            dbReset()
+        }
+
         for ((index, value) in gLottoList.withIndex()) {
             lateinit var sLottoList : Array<String>
             val sAddGrid: GridView = GridView(this)
+            val sAddGridPram = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             var sStr = value.number
-            println(sStr)
 
+            sAddGridPram.height = dpToPx(43F)
+            sAddGrid.layoutParams = sAddGridPram
             sAddGrid.numColumns = 6
+            sAddGrid.background = ContextCompat.getDrawable(this,R.drawable.lotto_grid_view)
+
             toolLottoLay.addView(sAddGrid)
 
             if (sStr !== null) {
@@ -126,11 +148,20 @@ class SelectLottoActivity : AppCompatActivity() {
                 sAddGrid.adapter = sAdapter
             }
         }
+        toolLottoLay.addView(sDelBtn)
+    }
+
+    private fun dbReset() {
+        for (value in gLottoList) {
+            val sLottoNum = LottoNum(value.id, "")
+            gDb.deleteLottoNum(sLottoNum)
+        }
+        refreshData()
     }
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
     fun View.margin(left: Float? = null, top: Float? = null, right: Float? = null, bottom: Float? = null) {
-        layoutParams<ViewGroup.MarginLayoutParams> {
+        layoutParams<MarginLayoutParams> {
             left?.run { leftMargin = dpToPx(this) }
             top?.run { topMargin = dpToPx(this) }
             right?.run { rightMargin = dpToPx(this) }
@@ -138,7 +169,7 @@ class SelectLottoActivity : AppCompatActivity() {
         }
     }
 
-    inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
+    inline fun <reified T : LayoutParams> View.layoutParams(block: T.() -> Unit) {
         if (layoutParams is T) block(layoutParams as T)
     }
 

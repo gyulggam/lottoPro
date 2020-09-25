@@ -12,8 +12,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="#F2F2F2"
+        android:layout_height="550dp"
+        android:background="#F2111111"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.NoActionBar"
         app:expanded="false">
@@ -49,31 +49,18 @@
                         android:layout_height="30dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
-                        android:text="선택한 번호"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#ffffff"
+                        android:text="저장한 번호"
                         android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/toolLottoLay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-<!--                    <GridView-->
-<!--                        android:id="@+id/lottoGridView"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:numColumns="6" />-->
-<!--                    <GridView-->
-<!--                        android:id="@+id/lottoGridView2"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:numColumns="6" />-->
-<!--                    <GridView-->
-<!--                        android:id="@+id/lottoGridView3"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:numColumns="6" />-->
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center|center_horizontal">
                 </LinearLayout>
             </LinearLayout>
 

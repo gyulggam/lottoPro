@@ -3,10 +3,7 @@ package com.example.lottopro.Adapter
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import com.example.lottopro.Str.LottoNum
 
 
@@ -36,12 +33,8 @@ class ButtonAdapter(private val aContext: Context, internal val aLottoNum: Array
             sBtn = view as ImageButton
         }
 
-        sBtn.setOnClickListener { v ->
-            Toast.makeText(
-                v.context,
-                "Button #" + (i + 1),
-                Toast.LENGTH_SHORT
-            ).show()
+        sBtn.setOnClickListener {
+
         }
         return sBtn
     }
