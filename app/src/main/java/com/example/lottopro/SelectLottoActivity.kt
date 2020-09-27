@@ -19,7 +19,11 @@ import kotlinx.android.synthetic.main.select_lotto.*
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import timber.log.Timber
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.Adapter.SelectButtonAdapter
 import com.example.lottopro.Str.LottoNum
+import com.google.android.material.internal.TextDrawableHelper
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.Collections
 
 class SelectLottoActivity : AppCompatActivity() {
@@ -43,19 +47,31 @@ class SelectLottoActivity : AppCompatActivity() {
 
         lottoGridLayout.columnCount = gMaxCol
         lottoGridLayout.rowCount = gMaxRow
+
+        selLottoView.numColumns = 6
         saveBtn.text = "번호 저장"
 
         for (i in 1 until gMaxLottoNum) {
             var sIsClick = false
+            var sBall = "ball_$i"
+            var sUnBall = "un_ball_1" //버튼 하나만 만들어 놓았음 부림아 제발 해도
             val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED,1, 1F)
             val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED,1, 1F)
             var sGridParam :GridLayout.LayoutParams
+            var sSelBtnAdapter : SelectButtonAdapter
+
 
             val sBtn = ImageButton(this).apply {
                 this.setOnClickListener {
                     if(sIsClick) {
-                        this.setBackgroundResource(R.drawable.button_shape)
+                        this.setBackgroundResource(resources.getIdentifier(sUnBall,"drawable", packageName))
                         gSelLotto.remove(i)
+
+                        gSelLotto.sort()
+
+                        sSelBtnAdapter = SelectButtonAdapter(context, gSelLotto)
+                        selLottoView.adapter = sSelBtnAdapter
+
                         sIsClick = false
                     } else {
                         if (gMaxSelLotto === gSelLotto.size) {
@@ -63,15 +79,14 @@ class SelectLottoActivity : AppCompatActivity() {
                             return@setOnClickListener
                         }
 
-                        when {
-                            i < 11 -> this.setBackgroundResource(R.drawable.lotto_num1)
-                            i < 21 -> this.setBackgroundResource(R.drawable.lotto_num10)
-                            i < 31 -> this.setBackgroundResource(R.drawable.lotto_num20)
-                            i < 41 -> this.setBackgroundResource(R.drawable.lotto_num30)
-                            else-> this.setBackgroundResource(R.drawable.lotto_num40)
-                        }
+                        this.setBackgroundResource(resources.getIdentifier(sBall,"drawable", packageName))
 
                         gSelLotto.add(i.toInt())
+
+                        gSelLotto.sort()
+
+                        sSelBtnAdapter = SelectButtonAdapter(context, gSelLotto)
+                        selLottoView.adapter = sSelBtnAdapter
                         sIsClick = true
                     }
 
@@ -79,11 +94,11 @@ class SelectLottoActivity : AppCompatActivity() {
                 }
             }
 
-            sBtn.setBackgroundResource(R.drawable.button_shape)
-            sBtn.foregroundGravity = Gravity.CENTER_HORIZONTAL
-
+            sBtn.setBackgroundResource(resources.getIdentifier(sUnBall,"drawable", packageName))
+            sBtn.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT)
             sGridParam = GridLayout.LayoutParams(sRow, sCol)
             lottoGridLayout.addView(sBtn, sGridParam)
+
         }
 
         saveBtn.setOnClickListener {
