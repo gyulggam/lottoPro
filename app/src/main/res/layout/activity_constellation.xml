@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutCenter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/GridLayoutLayout3"
@@ -51,7 +52,8 @@
         android:layout_height="65dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCenter">
 
     </GridLayout>
 
@@ -59,8 +61,10 @@
     <LinearLayout
         android:id="@+id/linearLayoutBottom"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent" >
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/GridLayoutLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/ad_view_container" >
         <Button
             android:id="@+id/goResultButton"
             android:layout_width="175dp"
@@ -79,4 +83,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBottom"
+        android:id="@+id/ad_view_container"
+        >
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
