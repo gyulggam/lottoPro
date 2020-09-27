@@ -7,7 +7,11 @@ import android.text.Editable
 import android.util.Log
 import android.view.Gravity
 import android.widget.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_constellation.*
+import kotlinx.android.synthetic.main.activity_constellation.adView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import java.util.*
 
@@ -16,6 +20,12 @@ class ConstellationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_constellation)
+
+        MobileAds.initialize(this) {}
+        var  mAdView = adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
 
 //        로또 번호 확인 버튼의 클릭이벤트 리스너 설정
         goResultButton.setOnClickListener{

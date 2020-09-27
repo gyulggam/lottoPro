@@ -10,7 +10,7 @@
 <LinearLayout
     android:id="@+id/linearLayoutLayout1"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="250dp"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@+id/linearLayoutLayout2">
     <ImageView
@@ -32,7 +32,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="16dp"
             app:srcCompat="@drawable/virgo"
@@ -57,7 +57,8 @@
         android:layout_height="65dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutLayout2">
 
     </GridLayout>
 
@@ -65,8 +66,9 @@
     <LinearLayout
         android:id="@+id/linearLayoutBottom"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent" >
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ad_view_container"
+        app:layout_constraintTop_toBottomOf="@+id/GridLayoutLayout3">
         <Button
             android:id="@+id/goResultButton"
             android:layout_width="175dp"
@@ -84,5 +86,25 @@
             android:text="번호저장하기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBottom"
+        android:id="@+id/ad_view_container"
+        >
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
