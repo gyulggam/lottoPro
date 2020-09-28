@@ -22,8 +22,8 @@ import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Adapter.SelectButtonAdapter
 import com.example.lottopro.Str.LottoNum
 import com.google.android.material.internal.TextDrawableHelper
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.main.*
+import kotlinx.android.synthetic.main.main.view.*
 import java.util.Collections
 
 class SelectLottoActivity : AppCompatActivity() {
