@@ -4,35 +4,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ConstellationActivity">
 
 
-<LinearLayout
-    android:id="@+id/linearLayoutLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="250dp"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/linearLayoutLayout2">
-    <ImageView
-        android:id="@+id/topImage"
+
+    <DatePicker
+        android:id="@+id/datePicker"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="16dp"
-        app:srcCompat="@drawable/lotto2"
-        />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
-        android:id="@+id/linearLayoutLayout2"
+        android:id="@+id/linearLayoutCenter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/GridLayoutLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/datePicker">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="16dp"
             app:srcCompat="@drawable/virgo"
@@ -58,7 +53,7 @@
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCenter">
 
     </GridLayout>
 
@@ -66,9 +61,10 @@
     <LinearLayout
         android:id="@+id/linearLayoutBottom"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/ad_view_container"
-        app:layout_constraintTop_toBottomOf="@+id/GridLayoutLayout3">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/GridLayoutLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/ad_view_container" >
         <Button
             android:id="@+id/goResultButton"
             android:layout_width="175dp"
@@ -88,6 +84,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,4 +103,5 @@
         </com.google.android.gms.ads.AdView>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

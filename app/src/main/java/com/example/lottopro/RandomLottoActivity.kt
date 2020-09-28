@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
-import kotlinx.android.synthetic.main.activity_constellation.*
+import kotlinx.android.synthetic.main.constellation.*
 
 
 class RandomLottoActivity : AppCompatActivity() {

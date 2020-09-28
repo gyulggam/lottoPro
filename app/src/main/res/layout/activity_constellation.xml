@@ -1,108 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ConstellationActivity">
 
+    <include layout="@layout/constellation" />
 
-
-    <DatePicker
-        android:id="@+id/datePicker"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="580dp"
+        android:background="#F2111111"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        app:expanded="false">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutCenter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/GridLayoutLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="16dp"
-            app:srcCompat="@drawable/virgo"
-            />
-
-        <TextView
-            android:id="@+id/textView"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="이게 텍스트야~"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="32dp"
-            android:gravity="center_horizontal|center_vertical"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
+            android:fitsSystemWindows="true"
+            app:contentScrim="#A6A6A6"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="#F2F2F2"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            app:toolbarId="@+id/toolbar">
 
-    <GridLayout
-        android:id="@+id/GridLayoutLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:paddingHorizontal="50dp"
-        android:paddingVertical="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCenter">
+            <LinearLayout
+                android:id="@+id/toolMainLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="fill_vertical">
 
-    </GridLayout>
+                <LinearLayout
+                    android:id="@+id/toolTitleLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/toolTitle"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#ffffff"
+                        android:text="저장한 번호"
+                        android:textSize="20sp" />
+                </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayoutBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        app:layout_constraintTop_toBottomOf="@+id/GridLayoutLayout3"
-        app:layout_constraintBottom_toTopOf="@+id/ad_view_container" >
-        <Button
-            android:id="@+id/goResultButton"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="로또번호뽑기"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                <LinearLayout
+                    android:id="@+id/toolLottoLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center|center_horizontal">
+                </LinearLayout>
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/goSaveButton"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="번호저장하기"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </LinearLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBottom"
-        android:id="@+id/ad_view_container"
-        >
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-        </com.google.android.gms.ads.AdView>
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
