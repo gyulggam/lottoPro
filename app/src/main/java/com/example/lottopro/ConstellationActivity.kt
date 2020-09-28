@@ -42,27 +42,27 @@ class ConstellationActivity : AppCompatActivity() {
 //        로또 번호 확인 버튼의 클릭이벤트 리스너 설정
         goResultButton.setOnClickListener{
             GridLayoutLayout3.removeAllViewsInLayout()
-         gSelLotto = LottoNumberMaker.getRandomLottoNumbers()
+            gSelLotto = LottoNumberMaker.getRandomLottoNumbers()
 
-        for (i in 1.. 6) {
-            GridLayoutLayout3.columnCount = 6
-            GridLayoutLayout3.rowCount = 1
-            val sCol: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
-            val sRow: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
-            var sGridParam: GridLayout.LayoutParams
-            val sBall = "ball_"+gSelLotto[i-1]
-            val sBtn = ImageButton(this)
+            for (i in 1.. 6) {
+                GridLayoutLayout3.columnCount = 6
+                GridLayoutLayout3.rowCount = 1
+                val sCol: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+                val sRow: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+                var sGridParam: GridLayout.LayoutParams
+                val sBall = "ball_"+gSelLotto[i-1]
+                val sBtn = ImageButton(this)
 //            sBtn.setBackgroundResource(R.drawable.ball_1)
-            sBtn.setBackgroundResource(resources.getIdentifier(sBall,"drawable", packageName))
-            sBtn.foregroundGravity = Gravity.CENTER_HORIZONTAL
+                sBtn.setBackgroundResource(resources.getIdentifier(sBall,"drawable", packageName))
+                sBtn.foregroundGravity = Gravity.CENTER_HORIZONTAL
 
-            sGridParam = GridLayout.LayoutParams(sRow, sCol)
-            GridLayoutLayout3.addView(sBtn, sGridParam)
+                sGridParam = GridLayout.LayoutParams(sRow, sCol)
+                GridLayoutLayout3.addView(sBtn, sGridParam)
+
+            }
+
 
         }
-
-
-    }
 /* 현재 DatePicker 의 월, 일 정보로 별자리 텍스트 변경 */
         textView.setText(makeConstellationString(datePicker.month, datePicker.dayOfMonth))
 //        DatePicker 의  날짜가 변화하면 별자리를 보여주는 텍스트뷰도 변경
@@ -81,13 +81,17 @@ class ConstellationActivity : AppCompatActivity() {
 
 //       로또번호저장 버튼의 클릭이벤트 리스너 설정
         goSaveButton.setOnClickListener{
+            if(gSelLotto == null){
+                Toast.makeText(applicationContext, "번호를 뽑아주세요!", Toast.LENGTH_SHORT).show()
+            }else{
 
-            val sStrArray = gSelLotto.map{ it.toString() }.toTypedArray()
-            val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
+                val sStrArray = gSelLotto.map{ it.toString() }.toTypedArray()
+                val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
 
-            gDb.addLottoNum(sLottoNum)
-            refreshData()
-            Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
+                gDb.addLottoNum(sLottoNum)
+                refreshData()
+                Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

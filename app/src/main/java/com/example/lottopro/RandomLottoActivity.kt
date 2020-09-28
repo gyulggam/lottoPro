@@ -10,7 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
-import kotlinx.android.synthetic.main.constellation.*
+import kotlinx.android.synthetic.main.activity_constellation.*
+import kotlinx.android.synthetic.main.activity_random_lotto.*
 
 
 class RandomLottoActivity : AppCompatActivity() {
@@ -55,8 +56,6 @@ class RandomLottoActivity : AppCompatActivity() {
 //       로또번호저장 버튼의 클릭이벤트 리스너 설정
         goSaveButton.setOnClickListener{
             Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
-
         }
-
     }
 }

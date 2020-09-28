@@ -67,7 +67,6 @@ class SqlHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME, null
     fun deleteLottoNum(aLottoNum: LottoNum) {
         val sDb = this.writableDatabase
 
-        println("aLottoNum.id ${aLottoNum.id}")
         sDb.delete(TABLE_NAME, "$LOTTO_ID=?", arrayOf(aLottoNum.id.toString()))
         sDb.close()
     }

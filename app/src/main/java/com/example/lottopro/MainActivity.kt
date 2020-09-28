@@ -26,22 +26,18 @@ class MainActivity : AppCompatActivity() {
         menuBtn1.setOnClickListener{
             sIntent = Intent(this@MainActivity, ConstellationActivity::class.java  )
             startActivity(sIntent);
-
         }
-
         menuBtn2.setOnClickListener{
             val sIntent = Intent(this@MainActivity, RandomLottoActivity::class.java  )
             startActivity(sIntent);
         }
         menuBtn3.setOnClickListener{
-//            val sIntent = Intent(this@MainActivity, ConstellationActivity::class.java  )
-//            startActivity(sIntent);
-
+            val sIntent = Intent(this@MainActivity, PatternLottoActivity::class.java  )
+            startActivity(sIntent);
         }
         menuBtn4.setOnClickListener{
             val intent = Intent(this@MainActivity, SelectLottoActivity::class.java  )
             startActivity(intent);
-
         }
     }
 

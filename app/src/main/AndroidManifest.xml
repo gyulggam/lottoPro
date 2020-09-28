@@ -20,9 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectLottoActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".SelectLottoActivity" />
         <activity android:name=".ConstellationActivity" />
+        <activity android:name=".PatternLottoActivity" />
         <activity android:name=".RandomLottoActivity" />
 
 

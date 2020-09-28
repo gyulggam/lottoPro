@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ConstellationActivity">
+    tools:context=".SelectLottoActivity">
 
-    <include layout="@layout/constellation" />
+    <include layout="@layout/pattern" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -67,8 +67,16 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                app:layout_collapseMode="pin"
+                app:layout_collapseMode="pin">
+
+                <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Departure"
+                android:textColor="#111111"
+                android:layout_gravity="center"
                 />
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

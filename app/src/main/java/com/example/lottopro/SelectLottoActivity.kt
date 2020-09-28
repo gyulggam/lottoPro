@@ -2,38 +2,35 @@ package com.example.lottopro
 
 import android.content.Context
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewGroup.*
+import android.view.ViewGroup.LayoutParams
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.*
-import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginBottom
-import androidx.core.view.marginLeft
-import kotlinx.android.synthetic.main.select_lotto.*
-import kotlinx.android.synthetic.main.activity_select_lotto.*
-import timber.log.Timber
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Adapter.SelectButtonAdapter
 import com.example.lottopro.Str.LottoNum
-import com.google.android.material.internal.TextDrawableHelper
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import java.util.Collections
+import kotlinx.android.synthetic.main.activity_select_lotto.*
+import kotlinx.android.synthetic.main.select_lotto.*
+import timber.log.Timber
+
 
 class SelectLottoActivity : AppCompatActivity() {
-    internal lateinit var  gDb:SqlHelper
-    internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
+    private lateinit var  gDb:SqlHelper
+    private var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
     private var gSelLotto = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree())
+
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#1874CD")))
 
         gDb = SqlHelper(this)
         setContentView(R.layout.activity_select_lotto)
@@ -55,8 +52,8 @@ class SelectLottoActivity : AppCompatActivity() {
             var sIsClick = false
             var sBall = "ball_$i"
             var sUnBall = "un_ball_1" //버튼 하나만 만들어 놓았음 부림아 제발 해도
-            val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED,1, 1F)
-            val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED,1, 1F)
+            val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             var sGridParam :GridLayout.LayoutParams
             var sSelBtnAdapter : SelectButtonAdapter
 
@@ -64,7 +61,13 @@ class SelectLottoActivity : AppCompatActivity() {
             val sBtn = ImageButton(this).apply {
                 this.setOnClickListener {
                     if(sIsClick) {
-                        this.setBackgroundResource(resources.getIdentifier(sUnBall,"drawable", packageName))
+                        this.setBackgroundResource(
+                            resources.getIdentifier(
+                                sUnBall,
+                                "drawable",
+                                packageName
+                            )
+                        )
                         gSelLotto.remove(i)
 
                         gSelLotto.sort()
@@ -79,7 +82,13 @@ class SelectLottoActivity : AppCompatActivity() {
                             return@setOnClickListener
                         }
 
-                        this.setBackgroundResource(resources.getIdentifier(sBall,"drawable", packageName))
+                        this.setBackgroundResource(
+                            resources.getIdentifier(
+                                sBall,
+                                "drawable",
+                                packageName
+                            )
+                        )
 
                         gSelLotto.add(i.toInt())
 
@@ -94,8 +103,11 @@ class SelectLottoActivity : AppCompatActivity() {
                 }
             }
 
-            sBtn.setBackgroundResource(resources.getIdentifier(sUnBall,"drawable", packageName))
-            sBtn.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT)
+            sBtn.setBackgroundResource(resources.getIdentifier(sUnBall, "drawable", packageName))
+            sBtn.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+            )
             sGridParam = GridLayout.LayoutParams(sRow, sCol)
             lottoGridLayout.addView(sBtn, sGridParam)
 
@@ -107,8 +119,14 @@ class SelectLottoActivity : AppCompatActivity() {
     }
 
     private fun saveBtn() {
+
         if (gSelLotto.size < 6) {
-            Toast.makeText(applicationContext, "6개 번호를 선택해야 합니다.", Toast.LENGTH_LONG).show();
+            Toast.makeText(applicationContext, "6개 번호를 선택해야 합니다.", Toast.LENGTH_SHORT).show();
+            return
+        }
+
+        if (gLottoList.size >= 10) {
+            Toast.makeText(applicationContext, "최대 10개까지 저장 가능합니다.", Toast.LENGTH_SHORT).show();
             return
         }
 
@@ -118,6 +136,7 @@ class SelectLottoActivity : AppCompatActivity() {
         val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
 
         gDb.addLottoNum(sLottoNum)
+        Toast.makeText(applicationContext, "저장 되었습니다.", Toast.LENGTH_SHORT).show();
         refreshData()
     }
 
@@ -125,8 +144,11 @@ class SelectLottoActivity : AppCompatActivity() {
         toolLottoLay.removeAllViews()
         gLottoList = gDb.gAllLottoNum
         val sDelBtn = Button(this)
-        val sDelBtnPam =  LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-        toolLottoLay.margin(20F,0F,20F,10F)
+        val sDelBtnPam =  LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        toolLottoLay.margin(20F, 0F, 20F, 10F)
 
         sDelBtnPam.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
         sDelBtnPam.topMargin = 30
@@ -134,7 +156,7 @@ class SelectLottoActivity : AppCompatActivity() {
         sDelBtn.layoutParams = sDelBtnPam
         sDelBtn.text = "전체 삭제"
         sDelBtn.gravity = Gravity.CENTER
-        sDelBtn.background = ContextCompat.getDrawable(this,R.drawable.save_button)
+        sDelBtn.background = ContextCompat.getDrawable(this, R.drawable.save_button)
         sDelBtn.setTextColor(Color.parseColor("#ffffff"))
 
         sDelBtn.setOnClickListener {
@@ -147,10 +169,10 @@ class SelectLottoActivity : AppCompatActivity() {
             val sAddGridPram = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             var sStr = value.number
 
-            sAddGridPram.height = dpToPx(43F)
+            sAddGridPram.height = dpToPx(42F)
             sAddGrid.layoutParams = sAddGridPram
             sAddGrid.numColumns = 6
-            sAddGrid.background = ContextCompat.getDrawable(this,R.drawable.lotto_grid_view)
+            sAddGrid.background = ContextCompat.getDrawable(this, R.drawable.lotto_grid_view)
 
             toolLottoLay.addView(sAddGrid)
 
@@ -175,7 +197,12 @@ class SelectLottoActivity : AppCompatActivity() {
     }
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
-    fun View.margin(left: Float? = null, top: Float? = null, right: Float? = null, bottom: Float? = null) {
+    fun View.margin(
+        left: Float? = null,
+        top: Float? = null,
+        right: Float? = null,
+        bottom: Float? = null
+    ) {
         layoutParams<MarginLayoutParams> {
             left?.run { leftMargin = dpToPx(this) }
             top?.run { topMargin = dpToPx(this) }
@@ -189,6 +216,10 @@ class SelectLottoActivity : AppCompatActivity() {
     }
 
     fun View.dpToPx(dp: Float): Int = context.dpToPx(dp)
-    fun Context.dpToPx(dp: Float): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
+    fun Context.dpToPx(dp: Float): Int = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        resources.displayMetrics
+    ).toInt()
     // 레이아웃에 마진 적용 할때 쓰는 함수
 }
