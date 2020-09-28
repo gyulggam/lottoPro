@@ -14,6 +14,7 @@ import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.common.util.CollectionUtils.isEmpty
 import com.google.android.material.internal.ViewUtils.dpToPx
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.constellation.*
@@ -42,16 +43,17 @@ class ConstellationActivity : AppCompatActivity() {
 //        로또 번호 확인 버튼의 클릭이벤트 리스너 설정
         goResultButton.setOnClickListener{
             GridLayoutLayout3.removeAllViewsInLayout()
-            gSelLotto = LottoNumberMaker.getRandomLottoNumbers()
+         gSelLotto = LottoNumberMaker.getRandomLottoNumbers()
 
-            for (i in 1.. 6) {
-                GridLayoutLayout3.columnCount = 6
-                GridLayoutLayout3.rowCount = 1
-                val sCol: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
-                val sRow: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
-                var sGridParam: GridLayout.LayoutParams
-                val sBall = "ball_"+gSelLotto[i-1]
-                val sBtn = ImageButton(this)
+        for (i in 1.. 6) {
+            GridLayoutLayout3.columnCount = 6
+            GridLayoutLayout3.rowCount = 1
+            GridLayoutLayout3.useDefaultMargins = true
+            val sCol: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            val sRow: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            var sGridParam: GridLayout.LayoutParams
+            val sBall = "ball_"+gSelLotto[i-1]
+            val sBtn = ImageButton(this)
 //            sBtn.setBackgroundResource(R.drawable.ball_1)
                 sBtn.setBackgroundResource(resources.getIdentifier(sBall,"drawable", packageName))
                 sBtn.foregroundGravity = Gravity.CENTER_HORIZONTAL
@@ -81,7 +83,7 @@ class ConstellationActivity : AppCompatActivity() {
 
 //       로또번호저장 버튼의 클릭이벤트 리스너 설정
         goSaveButton.setOnClickListener{
-            if(gSelLotto == null){
+            if(isEmpty(gSelLotto)){
                 Toast.makeText(applicationContext, "번호를 뽑아주세요!", Toast.LENGTH_SHORT).show()
             }else{
 
