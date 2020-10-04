@@ -1,47 +1,116 @@
 package com.example.lottopro
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.GridView
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
+import com.example.lottopro.DataBase.SqlPatternSelectNum
 import com.example.lottopro.Str.LottoNum
+import com.example.lottopro.Str.PatSelNum
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.pattern.*
+import kotlinx.android.synthetic.main.select_lotto.*
+import kotlinx.android.synthetic.main.select_lotto.saveBtn
 import timber.log.Timber
 
-class PatternLottoActivity : AppCompatActivity() {
+class PatternSelectLottoActivity : AppCompatActivity() {
     private lateinit var  gDb: SqlHelper
+    private lateinit var  gPatDb: SqlPatternSelectNum
     private var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
+    private var gPatSelList:List<PatSelNum> = ArrayList<PatSelNum>()
     private var gSelLotto = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree() )
         gDb = SqlHelper(this)
-        setContentView(R.layout.activity_pattern)
+        gPatDb = SqlPatternSelectNum(this)
+        setContentView(R.layout.activity_pattern_select)
 
         refreshData()
 
-        patSelNum.setOnClickListener{
-            val sIntent = Intent(this@PatternLottoActivity, PatternSelectLottoActivity::class.java  )
-            startActivity(sIntent);
+        var gMaxSelLotto = 45
+        var gMaxLottoNum = 46
+        var gMaxCol = 7
+        var gMaxRow = 7
+
+        lottoGridLayout.columnCount = gMaxCol
+        lottoGridLayout.rowCount = gMaxRow
+        saveBtn.text = "번호 저장"
+
+        for (i in 1 until gMaxLottoNum) {
+            var sIsClick = false
+            var sBall = "ball_$i"
+            var sUnBall = "un_ball_1" //버튼 하나만 만들어 놓았음 부림아 제발 해도
+            val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            var sGridParam : GridLayout.LayoutParams
+
+            val sBtn = ImageButton(this).apply {
+                this.setOnClickListener {
+                    if(sIsClick) {
+                        this.setBackgroundResource(
+                            resources.getIdentifier(sUnBall, "drawable", packageName)
+                        )
+                        gSelLotto.remove(i)
+                        gSelLotto.sort()
+
+                        sIsClick = false
+                    } else {
+                        if (gMaxSelLotto === gSelLotto.size) {
+                            Toast.makeText(applicationContext, "어림없지 45개까지다 쒜끼야~", Toast.LENGTH_LONG).show();
+                            return@setOnClickListener
+                        }
+
+                        this.setBackgroundResource(
+                            resources.getIdentifier(sBall, "drawable", packageName)
+                        )
+
+                        gSelLotto.add(i.toInt())
+                        gSelLotto.sort()
+
+                        sIsClick = true
+                    }
+                }
+            }
+
+            sBtn.setBackgroundResource(resources.getIdentifier(sUnBall, "drawable", packageName))
+            sBtn.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+            )
+            sGridParam = GridLayout.LayoutParams(sRow, sCol)
+            lottoGridLayout.addView(sBtn, sGridParam)
+
         }
 
-        patSelPattern.setOnClickListener{
-            val sIntent = Intent(this@PatternLottoActivity, PatternSelectLottoActivity::class.java  )
-            startActivity(sIntent);
+        saveBtn.setOnClickListener {
+            patSelectBtn()
         }
+    }
+
+    private fun patSelectBtn() {
+        if (gPatSelList.isNotEmpty()) {
+            Toast.makeText(applicationContext, "최대 10개까지 저장 가능합니다.", Toast.LENGTH_SHORT).show();
+            return
+        }
+
+        gSelLotto.sort()
+
+        val sStrArray = gSelLotto.map{ it.toString() }.toTypedArray()
+        val sLottoNum = PatSelNum(0, sStrArray.joinToString(","))
+
+        gPatDb.addPatSel(sLottoNum)
+        Toast.makeText(applicationContext, "저장 되었습니다.", Toast.LENGTH_SHORT).show();
+        refreshData()
     }
 
     private fun refreshData() {

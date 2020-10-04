@@ -1,13 +1,12 @@
-package com.example.lottopro
+package com.example.lottopro.DataBase
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.lottopro.Str.LottoNum
 
-class SqlHelper(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME, null, DATABASE_VER) {
+class SqlHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
     companion object {
         private const val DATABASE_VER  = 1
         private const val DATABASE_NAME = "LOTTONUMSAVE.db"

@@ -11,18 +11,18 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.common.util.CollectionUtils.isEmpty
-import com.google.android.material.internal.ViewUtils.dpToPx
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.constellation.*
 import kotlinx.android.synthetic.main.constellation.adView
 import java.util.*
 
 class ConstellationActivity : AppCompatActivity() {
-    internal lateinit var  gDb:SqlHelper
+    internal lateinit var  gDb: SqlHelper
     internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
     private var gSelLotto = mutableListOf<Int>()
 

@@ -14,6 +14,7 @@ import android.widget.GridView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
@@ -23,21 +24,17 @@ import timber.log.Timber
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    internal lateinit var  gDb:SqlHelper
+    internal lateinit var  gDb: SqlHelper
     internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
     private var gSelLotto = mutableListOf<Int>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         gDb = SqlHelper(this)
-
 
         Timber.plant(Timber.DebugTree())
         setContentView(R.layout.activity_main)
-
 
         refreshData()
 
@@ -70,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         refreshData()
     }
-
 
     private fun refreshData() {
         toolLottoLay.removeAllViews()

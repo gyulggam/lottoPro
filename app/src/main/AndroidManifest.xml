@@ -23,6 +23,7 @@
         <activity android:name=".SelectLottoActivity" />
         <activity android:name=".ConstellationActivity" />
         <activity android:name=".PatternLottoActivity" />
+        <activity android:name=".PatternSelectLottoActivity" />
         <activity android:name=".RandomLottoActivity" />
 
 

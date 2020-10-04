@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
@@ -23,7 +24,7 @@ import java.util.ArrayList
 
 
 class RandomLottoActivity : AppCompatActivity() {
-    internal lateinit var  gDb:SqlHelper
+    internal lateinit var  gDb: SqlHelper
     internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
     private var gSelLotto = mutableListOf<Int>()
 
