@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.lottopro.Str.LottoNum
+import java.util.ArrayList
 
 
-class ButtonAdapter(private val aContext: Context, internal val aLottoNum: Array<String>) : BaseAdapter() {
-    private val sTotalBtn = 6
+class ButtonAdapter(private val aContext: Context, internal val aLottoNum: Array<String>?) : BaseAdapter() {
+    private val sTotalBtn = aLottoNum!!.size
 
     override fun getCount(): Int {
         return sTotalBtn
@@ -24,7 +25,7 @@ class ButtonAdapter(private val aContext: Context, internal val aLottoNum: Array
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
         val sBtn: ImageButton
-        var sBall = "ball_${aLottoNum[i]}"
+        var sBall = "ball_${aLottoNum?.get(i)}"
 
         if (view == null) {
             sBtn = ImageButton(aContext)
