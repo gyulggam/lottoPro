@@ -110,7 +110,6 @@ class SelectLottoActivity : AppCompatActivity() {
             )
             sGridParam = GridLayout.LayoutParams(sRow, sCol)
             lottoGridLayout.addView(sBtn, sGridParam)
-
         }
 
         saveBtn.setOnClickListener {

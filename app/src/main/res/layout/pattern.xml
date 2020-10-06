@@ -27,7 +27,8 @@
         <LinearLayout
             android:id="@+id/patSelNum"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:minHeight="150dp"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:background="@drawable/pattern_layout_border"

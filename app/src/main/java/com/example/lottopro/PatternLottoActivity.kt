@@ -8,9 +8,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.GridView
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
@@ -18,18 +16,60 @@ import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.pattern.*
+import kotlinx.android.synthetic.main.select_lotto.*
 import timber.log.Timber
 
 class PatternLottoActivity : AppCompatActivity() {
     private lateinit var  gDb: SqlHelper
     private var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
-    private var gSelLotto = mutableListOf<Int>()
+    private var gSelLottoList = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree() )
         gDb = SqlHelper(this)
         setContentView(R.layout.activity_pattern)
+
+        var sGetIntent = intent
+        var sSelLottoList : ArrayList<Int>? = sGetIntent.extras?.getIntegerArrayList("selLotto") as ArrayList<Int>?
+
+        if (sSelLottoList != null) {
+            gSelLottoList = sSelLottoList
+        }
+
+        var gMaxCol = 7
+        var gMaxRow = 7
+        val sGridSpace: GridLayout = GridLayout(this)
+        val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+        val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+        var sGridSpacePram : GridLayout.LayoutParams
+
+        patSelNum.setPadding(30,25,30,25)
+
+        println("sSelLottoList ::: $gSelLottoList")
+
+        sGridSpace.columnCount = gMaxCol
+        sGridSpace.rowCount = gMaxRow
+
+        patSelNum.addView(sGridSpace)
+
+        if (sSelLottoList != null) {
+            for((index, value) in sSelLottoList.withIndex()) {
+                var sBall = "ball_$value"
+                val sBtn = ImageButton(this)
+
+                sBtn.setBackgroundResource(
+                    resources.getIdentifier(sBall, "drawable", packageName)
+                )
+                sBtn.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+
+                sGridSpacePram = GridLayout.LayoutParams(sRow, sCol)
+                sGridSpace.addView(sBtn, sGridSpacePram)
+            }
+        }
 
         refreshData()
 

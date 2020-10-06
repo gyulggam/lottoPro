@@ -1,6 +1,7 @@
 package com.example.lottopro
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
@@ -12,9 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
-import com.example.lottopro.DataBase.SqlPatternSelectNum
 import com.example.lottopro.Str.LottoNum
-import com.example.lottopro.Str.PatSelNum
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.pattern.*
 import kotlinx.android.synthetic.main.select_lotto.*
@@ -23,16 +22,13 @@ import timber.log.Timber
 
 class PatternSelectLottoActivity : AppCompatActivity() {
     private lateinit var  gDb: SqlHelper
-    private lateinit var  gPatDb: SqlPatternSelectNum
     private var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
-    private var gPatSelList:List<PatSelNum> = ArrayList<PatSelNum>()
-    private var gSelLotto = mutableListOf<Int>()
+    private var gSelLotto = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree() )
         gDb = SqlHelper(this)
-        gPatDb = SqlPatternSelectNum(this)
         setContentView(R.layout.activity_pattern_select)
 
         refreshData()
@@ -89,7 +85,6 @@ class PatternSelectLottoActivity : AppCompatActivity() {
             )
             sGridParam = GridLayout.LayoutParams(sRow, sCol)
             lottoGridLayout.addView(sBtn, sGridParam)
-
         }
 
         saveBtn.setOnClickListener {
@@ -98,19 +93,12 @@ class PatternSelectLottoActivity : AppCompatActivity() {
     }
 
     private fun patSelectBtn() {
-        if (gPatSelList.isNotEmpty()) {
-            Toast.makeText(applicationContext, "최대 10개까지 저장 가능합니다.", Toast.LENGTH_SHORT).show();
-            return
-        }
-
         gSelLotto.sort()
 
-        val sStrArray = gSelLotto.map{ it.toString() }.toTypedArray()
-        val sLottoNum = PatSelNum(0, sStrArray.joinToString(","))
+        val sIntent = Intent(this@PatternSelectLottoActivity, PatternLottoActivity::class.java)
+        sIntent.putExtra("selLotto",gSelLotto)
 
-        gPatDb.addPatSel(sLottoNum)
-        Toast.makeText(applicationContext, "저장 되었습니다.", Toast.LENGTH_SHORT).show();
-        refreshData()
+        startActivity(sIntent);
     }
 
     private fun refreshData() {
@@ -190,3 +178,4 @@ class PatternSelectLottoActivity : AppCompatActivity() {
     fun Context.dpToPx(dp: Float): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
     // 레이아웃에 마진 적용 할때 쓰는 함수
 }
+
