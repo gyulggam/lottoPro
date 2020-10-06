@@ -51,7 +51,7 @@ class SelectLottoActivity : AppCompatActivity() {
         for (i in 1 until gMaxLottoNum) {
             var sIsClick = false
             var sBall = "ball_$i"
-            var sUnBall = "un_ball_1" //버튼 하나만 만들어 놓았음 부림아 제발 해도
+            var sUnBall = "unball_$i" //버튼 하나만 만들어 놓았음 부림아 제발 해도
             val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             var sGridParam :GridLayout.LayoutParams
@@ -118,7 +118,6 @@ class SelectLottoActivity : AppCompatActivity() {
     }
 
     private fun saveBtn() {
-
         if (gSelLotto.size < 6) {
             Toast.makeText(applicationContext, "6개 번호를 선택해야 합니다.", Toast.LENGTH_SHORT).show();
             return
