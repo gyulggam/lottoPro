@@ -21,20 +21,20 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
             android:fitsSystemWindows="true"
+            android:orientation="vertical"
             app:contentScrim="#A6A6A6"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="#F2F2F2"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
             app:toolbarId="@+id/toolbar">
 
             <LinearLayout
                 android:id="@+id/toolMainLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="fill_vertical">
+                android:layout_gravity="fill_vertical"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/toolTitleLay"
@@ -49,18 +49,42 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="10dp"
-                        android:textColor="#ffffff"
                         android:text="저장한 번호"
+                        android:textColor="#ffffff"
                         android:textSize="20sp" />
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/toolLottoLay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_gravity="center|center_horizontal">
+                    android:layout_gravity="center|center_horizontal"
+                    android:orientation="vertical"></LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/toolMiddleLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/toolMiddle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="회차 당첨번호"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/toolLottoLay2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center|center_horizontal"
+                    android:orientation="vertical"></LinearLayout>
             </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar

@@ -1,5 +1,9 @@
 package com.example.lottopro
 
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.select.Elements
+import java.io.IOException
 import java.util.*
 
 object LottoNumberMaker {
@@ -51,6 +55,27 @@ object LottoNumberMaker {
 
 
         return sList.subList(0, 6)
+    }
+
+    fun getNumber(): ArrayList<String>? {
+        var arrayList: ArrayList<String>?
+        arrayList = ArrayList()
+        try {
+            val doc: Document = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main").get()
+            var contents: Elements
+            contents = doc.select("#lottoDrwNo")
+//            arrayList.add(contents.text()) // 로또당첨 횟수
+            for (i in 1..6) {
+                contents = doc.select("#drwtNo$i")
+                arrayList.add(contents.text()) // 당첨번호 1번 ~ 6번
+            }
+            contents = doc.select("#bnusNo")
+            arrayList.add(contents.text()) // 보너스 번호
+        } catch (e: IOException) {
+            //e.printStackTrace();
+//            Log.d("LottoNum의 getNumber()함수 에러 : ", e.getMessage())
+        }
+        return arrayList
     }
 
 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.lottopro.Str.LottoNum
+import java.util.ArrayList
 
 class ButtonAdapter(private val aContext: Context, internal val aLottoNum: Array<String>?) : BaseAdapter() {
     private val sTotalBtn = aLottoNum!!.size
