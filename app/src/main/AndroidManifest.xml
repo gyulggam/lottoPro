@@ -30,6 +30,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".PatternSelectLottoActivity"
             android:parentActivityName=".MainActivity"/>
+        <activity android:name=".PatternTypeActivity"
+            android:parentActivityName=".MainActivity"/>
 
 
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->

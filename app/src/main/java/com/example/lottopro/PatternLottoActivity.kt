@@ -79,7 +79,7 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         patSelPattern.setOnClickListener{
-            val sIntent = Intent(this@PatternLottoActivity, PatternSelectLottoActivity::class.java  )
+            val sIntent = Intent(this@PatternLottoActivity, PatternTypeActivity::class.java  )
             startActivity(sIntent);
         }
     }
