@@ -1,13 +1,17 @@
 package com.example.lottopro
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lottopro.DataBase.PatternSelSql
+import com.example.lottopro.DataBase.PatternTypeSql
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
+import com.example.lottopro.Str.PatternType
 import kotlinx.android.synthetic.main.pattern_type.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import org.json.JSONArray
@@ -15,7 +19,12 @@ import org.json.JSONObject
 import timber.log.Timber
 
 class PatternTypeActivity : AppCompatActivity() {
+    private lateinit var  gPatternDb: PatternTypeSql
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        gPatternDb = PatternTypeSql(this)
+        var gPatternType = gPatternDb.gPatternType
+
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree() )
         setContentView(R.layout.pattern_type)
@@ -32,8 +41,6 @@ class PatternTypeActivity : AppCompatActivity() {
 
         var sTotalNum = 0
         var sFiveNum = sStr.toInt()
-
-        var sNumJson = JSONObject()
 
         firstDown.setOnClickListener {
             if (sTotalNum > 0 && sFirstNum > 0) {
@@ -116,6 +123,7 @@ class PatternTypeActivity : AppCompatActivity() {
                 sTotalNum--
                 println("sTotalNum ::::: $sTotalNum")
             }
+
             if (sFiveNum > 0) {
                 sFiveNum--
             }
@@ -130,12 +138,19 @@ class PatternTypeActivity : AppCompatActivity() {
             fiveNum.text = sFiveNum.toString()
         }
 
-        sNumJson.put("FirstNum", sFirstNum)
-        sNumJson.put("SecondNum", sSecondNum)
-        sNumJson.put("ThirdNum", sThirdNum)
-        sNumJson.put("FourthNum", sFourthNum)
-        sNumJson.put("FiveNum", sFiveNum)
+        patternSave.setOnClickListener {
+            var sStr = "${sFirstNum.toString()},${sSecondNum.toString()},${sThirdNum.toString()},${sFourthNum.toString()},${sFiveNum.toString()}"
+            var sPatternType = PatternType(0, sStr)
 
-        println("sNumJson ::::: $sNumJson")
+            for(value in gPatternType) {
+                var sDeletePattern = PatternType(value.id, "")
+                gPatternDb.deletePatternType(sDeletePattern)
+            }
+
+            gPatternDb.addPatternType(sPatternType)
+
+            val sIntent = Intent(this@PatternTypeActivity, PatternLottoActivity::class.java)
+            startActivity(sIntent);
+        }
     }
 }

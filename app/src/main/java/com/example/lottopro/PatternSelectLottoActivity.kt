@@ -12,8 +12,10 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.DataBase.PatternSelSql
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
+import com.example.lottopro.Str.PatternSelNum
 import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.pattern.*
 import kotlinx.android.synthetic.main.select_lotto.*
@@ -22,13 +24,16 @@ import timber.log.Timber
 
 class PatternSelectLottoActivity : AppCompatActivity() {
     private lateinit var  gDb: SqlHelper
+    private lateinit var  gPatternDb: PatternSelSql
     private var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
+    private var gPatternList:List<PatternSelNum> = ArrayList<PatternSelNum>()
     private var gSelLotto = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree() )
         gDb = SqlHelper(this)
+        gPatternDb = PatternSelSql(this)
         setContentView(R.layout.activity_pattern_select)
 
         refreshData()
@@ -94,10 +99,19 @@ class PatternSelectLottoActivity : AppCompatActivity() {
 
     private fun patSelectBtn() {
         gSelLotto.sort()
+        gPatternList = gPatternDb.gPatternSelNum
+
+        for(value in gPatternList) {
+            var sDeletePattern = PatternSelNum(value.id, "")
+            gPatternDb.deletePatternSel(sDeletePattern)
+        }
+
+        val sStrArray = gSelLotto.map{ it.toString() }.toTypedArray()
+        val sLottoNum = PatternSelNum(0, sStrArray.joinToString(","))
+
+        gPatternDb.addPatternSel(sLottoNum)
 
         val sIntent = Intent(this@PatternSelectLottoActivity, PatternLottoActivity::class.java)
-        sIntent.putExtra("selLotto",gSelLotto)
-
         startActivity(sIntent);
     }
 
