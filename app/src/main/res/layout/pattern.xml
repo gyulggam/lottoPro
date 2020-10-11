@@ -59,7 +59,8 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:id="@+id/selLottoView"/>
+            android:numColumns="6"
+            android:id="@+id/createLottoView"/>
 
         <LinearLayout
             android:id="@+id/patBtnLine"
@@ -80,7 +81,7 @@
                 android:background="@drawable/save_button" />
 
             <Button
-                android:id="@+id/saveBtn"
+                android:id="@+id/patternSaveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#F2F2F2"

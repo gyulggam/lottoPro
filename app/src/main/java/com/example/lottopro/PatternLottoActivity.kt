@@ -31,7 +31,7 @@ class PatternLottoActivity : AppCompatActivity() {
     private lateinit var gDb: SqlHelper
     private lateinit var gPatternDb: PatternSelSql
     private lateinit var gPatternTypeDb : PatternTypeSql
-    private var gSelLottoList = ArrayList<Int>()
+    private var gIntResultLotto = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class PatternLottoActivity : AppCompatActivity() {
         gDb = SqlHelper(this)
         gPatternDb = PatternSelSql(this)
         gPatternTypeDb = PatternTypeSql(this)
-        setContentView(R.layout.activity_pattern)
+        setContentView(R.layout.pattern)
 
         var sPatternSelectNum = gPatternDb.gPatternSelNum
         var sPatternType = gPatternTypeDb.gPatternType
@@ -108,6 +108,18 @@ class PatternLottoActivity : AppCompatActivity() {
         createBtn.setOnClickListener {
             createPatternLotto(sPatternSelectNum, sPatternType)
         }
+
+        patternSaveBtn.setOnClickListener {
+            saveBtn()
+        }
+    }
+
+    private fun saveBtn() {
+        val sStrArray = gIntResultLotto.map{ it.toString() }.toTypedArray()
+        val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
+
+        gDb.addLottoNum(sLottoNum)
+        Toast.makeText(applicationContext, "저장 되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
     private fun createPatternLotto(aSelectArray : List<PatternSelNum>, aPatternList : List<PatternType>) {
@@ -118,17 +130,16 @@ class PatternLottoActivity : AppCompatActivity() {
         var sTwoList = ArrayList<String>()
         var sTreeList = ArrayList<String>()
         var sFourList = ArrayList<String>()
-        var sResultLotto = ArrayList<String>()
         var sPatternJson = JSONObject()
 
         if (sSelNumList !== null) {
             for((index, value) in sSelNumList.withIndex()) {
                 var sVal = value.toInt()
                 when(sVal) {
-                    in 0..11 -> sOneList.add(value)
-                    in 11..21 -> sTenList.add(value)
-                    in 21..31 -> sTwoList.add(value)
-                    in 31..41 -> sTreeList.add(value)
+                    in 0..10 -> sOneList.add(value)
+                    in 11..20 -> sTenList.add(value)
+                    in 21..30 -> sTwoList.add(value)
+                    in 31..40 -> sTreeList.add(value)
                     in 41..45 -> sFourList.add(value)
                 }
             }
@@ -146,27 +157,65 @@ class PatternLottoActivity : AppCompatActivity() {
 
         for(i in 1..sPatternJson.getInt("one")) {
             var sRandom = Random().nextInt(sOneList.size)
-            sResultLotto.add(sOneList[sRandom])
+            var sValue : Int = sOneList[sRandom].toInt()
+
+            while(gIntResultLotto.indexOf(sValue) > -1) {
+                sValue++
+            }
+
+            gIntResultLotto.add(sValue)
         }
 
         for(i in 1..sPatternJson.getInt("ten")) {
             var sRandom = Random().nextInt(sTenList.size)
-            sResultLotto.add(sTenList[sRandom])
+            var sValue : Int = sTenList[sRandom].toInt()
+
+            while(gIntResultLotto.indexOf(sValue) > -1) {
+                sValue++
+            }
+
+            gIntResultLotto.add(sValue)
         }
 
         for(i in 1..sPatternJson.getInt("two")) {
             var sRandom = Random().nextInt(sTwoList.size)
-            sResultLotto.add(sTwoList[sRandom])
+            var sValue : Int = sTwoList[sRandom].toInt()
+
+            while(gIntResultLotto.indexOf(sValue) > -1) {
+                sValue++
+            }
+
+            gIntResultLotto.add(sValue)
         }
 
         for(i in 1..sPatternJson.getInt("tree")) {
             var sRandom = Random().nextInt(sTreeList.size)
-            sResultLotto.add(sTreeList[sRandom])
+            var sValue : Int = sTreeList[sRandom].toInt()
+
+            while(gIntResultLotto.indexOf(sValue) > -1) {
+                sValue++
+            }
+
+            gIntResultLotto.add(sValue)
         }
 
         for(i in 1..sPatternJson.getInt("four")) {
             var sRandom = Random().nextInt(sFourList.size)
-            sResultLotto.add(sFourList[sRandom])
+            var sValue : Int = sFourList[sRandom].toInt()
+
+            while(gIntResultLotto.indexOf(sValue) > -1) {
+                    sValue++
+            }
+
+            gIntResultLotto.add(sValue)
+        }
+
+        gIntResultLotto.sort()
+        val sResultLotto = gIntResultLotto.map { it.toString()}.toTypedArray()
+
+        if (sResultLotto != null) {
+            var sAdapter = ButtonAdapter(this, sResultLotto)
+            createLottoView.adapter = sAdapter
         }
 
         println("sResultLotto $sResultLotto")

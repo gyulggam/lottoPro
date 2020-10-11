@@ -13,4 +13,8 @@
     <style name="AppTheme.ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">20dp</item>
     </style>
+
+    <style name="NumberPickerStyle">
+        <item name="colorControlNormal">#5E4BE1</item>
+    </style>
 </resources>

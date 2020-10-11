@@ -4,6 +4,9 @@ import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -30,15 +33,23 @@ class ConstellationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         gDb = SqlHelper(this)
-        setContentView(R.layout.activity_constellation)
+        setContentView(R.layout.constellation)
 
-        refreshData()
+        //mainText 색변경
+        var sMainStr = mainText.text.toString()
+        var sSpannable = SpannableString(sMainStr)
+        var sChangeStr = "별자리 운"
+        var sStartStr = sMainStr.indexOf(sChangeStr)
+        var sEndStr = sStartStr + sChangeStr.length
+
+        sSpannable.setSpan(ForegroundColorSpan(Color.parseColor("#5E4BE1")), sStartStr, sEndStr, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        mainText.text = sSpannable
+        //mainText 색변경
 
         MobileAds.initialize(this) {}
         var  mAdView = adView
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
-
 
 //        로또 번호 확인 버튼의 클릭이벤트 리스너 설정
         goResultButton.setOnClickListener{
@@ -62,8 +73,6 @@ class ConstellationActivity : AppCompatActivity() {
                 GridLayoutLayout3.addView(sBtn, sGridParam)
 
             }
-
-
         }
 /* 현재 DatePicker 의 월, 일 정보로 별자리 텍스트 변경 */
         textView.setText(makeConstellationString(datePicker.month, datePicker.dayOfMonth))
@@ -78,7 +87,6 @@ class ConstellationActivity : AppCompatActivity() {
             override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
 
             }
-
         })
 
 //       로또번호저장 버튼의 클릭이벤트 리스너 설정
@@ -91,7 +99,6 @@ class ConstellationActivity : AppCompatActivity() {
                 val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
 
                 gDb.addLottoNum(sLottoNum)
-                refreshData()
                 Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -178,7 +185,6 @@ class ConstellationActivity : AppCompatActivity() {
         }
         makeConstellationImage(TargetVal)
         return TargetName
-
     }
     fun makeConstellationImage(sTarget: String)  {
 //        전달받은 월 정보와 일 정보를 기반으로 정수형태의 값을 만든다.
@@ -190,60 +196,11 @@ class ConstellationActivity : AppCompatActivity() {
 
     }
 
-    private fun refreshData() {
-        toolLottoLay.removeAllViews()
-        gLottoList = gDb.gAllLottoNum
-        val sDelBtn = Button(this)
-        val sDelBtnPam =  LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-        toolLottoLay.margin(20F,0F,20F,10F)
-
-        sDelBtnPam.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-        sDelBtnPam.topMargin = 30
-
-        sDelBtn.layoutParams = sDelBtnPam
-        sDelBtn.text = "전체 삭제"
-        sDelBtn.gravity = Gravity.CENTER
-        sDelBtn.background = ContextCompat.getDrawable(this,R.drawable.save_button)
-        sDelBtn.setTextColor(Color.parseColor("#ffffff"))
-
-        sDelBtn.setOnClickListener {
-            dbReset()
-        }
-
-        for ((index, value) in gLottoList.withIndex()) {
-            lateinit var sLottoList : Array<String>
-            val sAddGrid: GridView = GridView(this)
-            val sAddGridPram = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            var sStr = value.number
-
-            sAddGridPram.height = dpToPx(43F)
-            sAddGrid.layoutParams = sAddGridPram
-            sAddGrid.numColumns = 6
-            sAddGrid.background = ContextCompat.getDrawable(this,R.drawable.lotto_grid_view)
-
-            toolLottoLay.addView(sAddGrid)
-
-            if (sStr !== null) {
-                sLottoList= sStr?.split(",").toTypedArray()
-            }
-
-            if (sLottoList != null) {
-                var sAdapter = ButtonAdapter(this, sLottoList)
-
-                sAddGrid.adapter = sAdapter
-            }
-        }
-        toolLottoLay.addView(sDelBtn)
-    }
     private fun dbReset() {
         for (value in gLottoList) {
             val sLottoNum = LottoNum(value.id, "")
             gDb.deleteLottoNum(sLottoNum)
         }
-        refreshData()
     }
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
