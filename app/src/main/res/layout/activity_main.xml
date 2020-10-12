@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity3">
 
-    <include layout="@layout/main" />
+    <include layout="@layout/main3" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"

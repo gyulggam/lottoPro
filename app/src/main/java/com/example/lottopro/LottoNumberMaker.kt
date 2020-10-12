@@ -68,6 +68,9 @@ object LottoNumberMaker {
             for (i in 1..6) {
                 contents = doc.select("#drwtNo$i")
                 arrayList.add(contents.text()) // 당첨번호 1번 ~ 6번
+                if(i == 6){
+                    arrayList.add("+")
+                }
             }
             contents = doc.select("#bnusNo")
             arrayList.add(contents.text()) // 보너스 번호
@@ -78,4 +81,32 @@ object LottoNumberMaker {
         return arrayList
     }
 
+    fun getCount(): String? {
+        var count =""
+        try {
+            val doc: Document = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main").get()
+            var contents: Elements
+            contents = doc.select("#lottoDrwNo")
+            count =contents.text() // 로또당첨 횟수
+
+        } catch (e: IOException) {
+            //e.printStackTrace();
+//            Log.d("LottoNum의 getNumber()함수 에러 : ", e.getMessage())
+        }
+        return count
+    }
+
+    fun getDate(): String {
+        var date =""
+        try{
+            val doc: Document = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main").get()
+            var contents: Elements
+            contents = doc.select("#drwNoDate")
+            date = contents.text()
+        } catch (e: IOException) {
+            //e.printStackTrace();
+//            Log.d("LottoNum의 getNumber()함수 에러 : ", e.getMessage())
+        }
+        return date
+    }
 }
