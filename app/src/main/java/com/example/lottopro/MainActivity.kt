@@ -3,21 +3,31 @@ package com.example.lottopro
 import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.StrictMode
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.GridView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.DataBase.SqlHelper
+import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.constellation.*
 import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.main.*
@@ -25,6 +35,9 @@ import kotlinx.android.synthetic.main.random_lotto.*
 import kotlinx.android.synthetic.main.main.adView
 
 class MainActivity : AppCompatActivity() {
+
+    internal lateinit var  gDb: SqlHelper
+    internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +109,50 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        refreshData()
     }
+
+    private fun refreshData() {
+
+        val sAddGridPram = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        saveLottoNum.removeAllViews()
+        gLottoList = gDb.gAllLottoNum
+
+        val sDelBtn = Button(this)
+        val sDelBtnPam =  LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        for ((index, value) in gLottoList.withIndex()) {
+            lateinit var sLottoList : Array<String>
+            val sAddGrid: GridView = GridView(this)
+
+            var sStr = value.number
+
+            sAddGrid.layoutParams = sAddGridPram
+            sAddGrid.numColumns = 6
+            sAddGrid.background = ContextCompat.getDrawable(this, R.drawable.lotto_grid_view)
+            sAddGrid.horizontalSpacing = 10
+            sAddGrid.verticalSpacing = 10
+            saveLottoNum.addView(sAddGrid)
+
+            if (sStr !== null) {
+                sLottoList= sStr?.split(",").toTypedArray()
+            }
+
+            if (sLottoList != null) {
+                var sAdapter = ButtonAdapter(this, sLottoList)
+
+                sAddGrid.adapter = sAdapter
+            }
+        }
+    }
+
 
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
