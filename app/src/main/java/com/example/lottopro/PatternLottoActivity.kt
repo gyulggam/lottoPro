@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.DataBase.PatternSelSql
@@ -19,7 +20,7 @@ import com.example.lottopro.Str.LottoNum
 import com.example.lottopro.Str.PatternSelNum
 import com.example.lottopro.Str.PatternType
 import com.google.android.gms.common.config.GservicesValue.value
-import kotlinx.android.synthetic.main.activity_select_lotto.*
+import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.pattern.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import org.json.JSONObject
@@ -40,6 +41,10 @@ class PatternLottoActivity : AppCompatActivity() {
         gPatternDb = PatternSelSql(this)
         gPatternTypeDb = PatternTypeSql(this)
         setContentView(R.layout.pattern)
+
+        val sToolbar = lottoHeader as Toolbar?
+        setSupportActionBar(sToolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         var sPatternSelectNum = gPatternDb.gPatternSelNum
         var sPatternType = gPatternTypeDb.gPatternType
@@ -112,6 +117,10 @@ class PatternLottoActivity : AppCompatActivity() {
         patternSaveBtn.setOnClickListener {
             saveBtn()
         }
+
+        viewBackBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun saveBtn() {
@@ -131,6 +140,7 @@ class PatternLottoActivity : AppCompatActivity() {
         var sTreeList = ArrayList<String>()
         var sFourList = ArrayList<String>()
         var sPatternJson = JSONObject()
+        gIntResultLotto = ArrayList<Int>()
 
         if (sSelNumList !== null) {
             for((index, value) in sSelNumList.withIndex()) {
@@ -218,7 +228,7 @@ class PatternLottoActivity : AppCompatActivity() {
             createLottoView.adapter = sAdapter
         }
 
-        println("sResultLotto $sResultLotto")
+        println("sResultLotto ${gIntResultLotto.toString()}")
     }
 
     // 레이아웃에 마진 적용 할때 쓰는 함수

@@ -20,7 +20,6 @@ import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_select_lotto.toolLottoLay
 import kotlinx.android.synthetic.main.main3.*
 import timber.log.Timber
 import kotlin.collections.ArrayList

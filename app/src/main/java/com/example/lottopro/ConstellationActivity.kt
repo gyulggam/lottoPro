@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
@@ -19,9 +20,9 @@ import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.common.util.CollectionUtils.isEmpty
-import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.constellation.*
 import kotlinx.android.synthetic.main.constellation.adView
+import kotlinx.android.synthetic.main.header_lotto.*
 import java.util.*
 
 class ConstellationActivity : AppCompatActivity() {
@@ -34,6 +35,10 @@ class ConstellationActivity : AppCompatActivity() {
 
         gDb = SqlHelper(this)
         setContentView(R.layout.constellation)
+
+        val sToolbar = lottoHeader as Toolbar?
+        setSupportActionBar(sToolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         //mainText 색변경
         var sMainStr = mainText.text.toString()
@@ -101,6 +106,10 @@ class ConstellationActivity : AppCompatActivity() {
                 gDb.addLottoNum(sLottoNum)
                 Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        viewBackBtn.setOnClickListener {
+            finish()
         }
     }
 

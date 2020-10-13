@@ -1,13 +1,18 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="actionBarStyle">@style/MyActionBar</item>
-        <item name="android:actionBarSize">50dp</item>
-        <item name="actionBarSize">50dp</item>
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light">-->
+<!--        <item name="android:actionBarStyle">@style/MyActionBar</item>-->
+<!--        <item name="actionBarStyle">@style/MyActionBar</item>-->
+<!--        <item name="android:actionBarSize">50dp</item>-->
+<!--        <item name="actionBarSize">50dp</item>-->
+<!--    </style>-->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
     </style>
 
     <style name="MyActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/headerGray</item>
+        <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
     <style name="AppTheme.ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
