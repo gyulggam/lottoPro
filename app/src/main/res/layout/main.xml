@@ -16,7 +16,6 @@
         android:orientation="vertical">
 
         <include layout="@layout/main_header_lotto"/>
-
         <LinearLayout
             android:id="@+id/linearLayoutTop"
             android:layout_width="match_parent"
@@ -56,6 +55,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:layout_weight="1"
@@ -105,25 +106,26 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="40dp"
-
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/image_stroke_constell_rectangle"
+                    android:gravity="center"
                     >
                     <Button
                         android:id="@+id/button1"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:background="@drawable/constellation_icon"
                         >
@@ -131,14 +133,16 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/image_stroke_constell_rectangle"
+                    android:gravity="center"
                     >
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/random_icon"
                     >
@@ -146,56 +150,67 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/image_stroke_constell_rectangle"
+                    android:gravity="center"
                     >
                 <Button
                     android:id="@+id/button3"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/pattern_icon"
                      >
 
                 </Button>
                 </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/image_stroke_constell_rectangle"
+                    android:gravity="center"
+                    >
                 <Button
                     android:id="@+id/button4"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:background="@drawable/select_icon"
                      >
 
                 </Button>
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/Text1"
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
                     android:gravity="center_horizontal"
+                    android:text="운세로또"
                     android:textColor="#3F3D55"
-                    android:textStyle="bold"
-                    android:text="운세로또" >
+                    android:textStyle="bold">
 
                 </TextView>
 
                 <TextView
                     android:id="@+id/Text2"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="5dp"
+
                     android:textColor="#3F3D55"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
@@ -206,10 +221,11 @@
 
                 <TextView
                     android:id="@+id/Text3"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="5dp"
+
                     android:textColor="#3F3D55"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
@@ -219,10 +235,11 @@
 
                 <TextView
                     android:id="@+id/Text4"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="5dp"
+
                     android:textColor="#3F3D55"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
@@ -305,6 +322,7 @@
             android:gravity="bottom"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="5dp"
             android:id="@+id/ad_view_container"
             >
             <com.google.android.gms.ads.AdView
