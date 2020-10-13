@@ -24,6 +24,19 @@
                 android:right="3dp"
                 android:top="3dp" />
 
+            <solid android:color="#055E4BE1" />
+
+            <corners android:radius="3dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <padding
+                android:bottom="3dp"
+                android:left="3dp"
+                android:right="3dp"
+                android:top="3dp" />
+
             <solid android:color="#105E4BE1" />
 
             <corners android:radius="3dp" />
@@ -51,19 +64,6 @@
                 android:top="3dp" />
 
             <solid android:color="#305E4BE1" />
-
-            <corners android:radius="3dp" />
-        </shape>
-    </item>
-    <item>
-        <shape android:shape="oval">
-            <padding
-                android:bottom="3dp"
-                android:left="3dp"
-                android:right="3dp"
-                android:top="3dp" />
-
-            <solid android:color="#405E4BE1" />
 
             <corners android:radius="3dp" />
         </shape>
