@@ -93,6 +93,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/conner30"
                 android:textSize="14dp"
+                android:stateListAnimator="@null"
                 android:text="이전회차" >
 
             </Button>
@@ -114,45 +115,57 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button1"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/constellation_icon"
-                     >
+                    >
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/constellation_icon"
+                        >
+                    </Button>
+                </LinearLayout>
 
-                </Button>
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    >
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
                     android:background="@drawable/random_icon"
                     >
-
                 </Button>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    >
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
                     android:background="@drawable/pattern_icon"
                      >
 
                 </Button>
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/button4"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
                     android:background="@drawable/select_icon"
                      >
 
