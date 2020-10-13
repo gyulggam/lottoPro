@@ -12,12 +12,13 @@ import android.view.ViewGroup.LayoutParams
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Adapter.SelectButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
-import kotlinx.android.synthetic.main.activity_select_lotto.*
+import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import timber.log.Timber
 
@@ -30,12 +31,12 @@ class SelectLottoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree())
 
-        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#1874CD")))
-
         gDb = SqlHelper(this)
-        setContentView(R.layout.activity_select_lotto)
+        setContentView(R.layout.select_lotto)
 
-        refreshData()
+        val sToolbar = lottoHeader as Toolbar?
+        setSupportActionBar(sToolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         var gMaxSelLotto = 6
         var gMaxLottoNum = 46
@@ -115,6 +116,9 @@ class SelectLottoActivity : AppCompatActivity() {
         saveBtn.setOnClickListener {
             saveBtn()
         }
+        viewBackBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun saveBtn() {
@@ -135,64 +139,63 @@ class SelectLottoActivity : AppCompatActivity() {
 
         gDb.addLottoNum(sLottoNum)
         Toast.makeText(applicationContext, "저장 되었습니다.", Toast.LENGTH_SHORT).show();
-        refreshData()
     }
 
-    private fun refreshData() {
-        toolLottoLay.removeAllViews()
-        gLottoList = gDb.gAllLottoNum
-        val sDelBtn = Button(this)
-        val sDelBtnPam =  LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        toolLottoLay.margin(20F, 0F, 20F, 10F)
-
-        sDelBtnPam.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-        sDelBtnPam.topMargin = 30
-
-        sDelBtn.layoutParams = sDelBtnPam
-        sDelBtn.text = "전체 삭제"
-        sDelBtn.gravity = Gravity.CENTER
-        sDelBtn.background = ContextCompat.getDrawable(this, R.drawable.save_button)
-        sDelBtn.setTextColor(Color.parseColor("#ffffff"))
-
-        sDelBtn.setOnClickListener {
-            dbReset()
-        }
-
-        for ((index, value) in gLottoList.withIndex()) {
-            lateinit var sLottoList : Array<String>
-            val sAddGrid: GridView = GridView(this)
-            val sAddGridPram = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            var sStr = value.number
-
-            sAddGridPram.height = dpToPx(42F)
-            sAddGrid.layoutParams = sAddGridPram
-            sAddGrid.numColumns = 6
-            sAddGrid.background = ContextCompat.getDrawable(this, R.drawable.lotto_grid_view)
-
-            toolLottoLay.addView(sAddGrid)
-
-            if (sStr !== null) {
-                sLottoList= sStr?.split(",").toTypedArray()
-            }
-
-            if (sLottoList != null) {
-                var sAdapter = ButtonAdapter(this, sLottoList)
-                sAddGrid.adapter = sAdapter
-            }
-        }
-        toolLottoLay.addView(sDelBtn)
-    }
-
-    private fun dbReset() {
-        for (value in gLottoList) {
-            val sLottoNum = LottoNum(value.id, "")
-            gDb.deleteLottoNum(sLottoNum)
-        }
-        refreshData()
-    }
+//    private fun refreshData() {
+//        toolLottoLay.removeAllViews()
+//        gLottoList = gDb.gAllLottoNum
+//        val sDelBtn = Button(this)
+//        val sDelBtnPam =  LinearLayout.LayoutParams(
+//            LinearLayout.LayoutParams.WRAP_CONTENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        toolLottoLay.margin(20F, 0F, 20F, 10F)
+//
+//        sDelBtnPam.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
+//        sDelBtnPam.topMargin = 30
+//
+//        sDelBtn.layoutParams = sDelBtnPam
+//        sDelBtn.text = "전체 삭제"
+//        sDelBtn.gravity = Gravity.CENTER
+//        sDelBtn.background = ContextCompat.getDrawable(this, R.drawable.save_button)
+//        sDelBtn.setTextColor(Color.parseColor("#ffffff"))
+//
+//        sDelBtn.setOnClickListener {
+//            dbReset()
+//        }
+//
+//        for ((index, value) in gLottoList.withIndex()) {
+//            lateinit var sLottoList : Array<String>
+//            val sAddGrid: GridView = GridView(this)
+//            val sAddGridPram = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+//            var sStr = value.number
+//
+//            sAddGridPram.height = dpToPx(42F)
+//            sAddGrid.layoutParams = sAddGridPram
+//            sAddGrid.numColumns = 6
+//            sAddGrid.background = ContextCompat.getDrawable(this, R.drawable.lotto_grid_view)
+//
+//            toolLottoLay.addView(sAddGrid)
+//
+//            if (sStr !== null) {
+//                sLottoList= sStr?.split(",").toTypedArray()
+//            }
+//
+//            if (sLottoList != null) {
+//                var sAdapter = ButtonAdapter(this, sLottoList)
+//                sAddGrid.adapter = sAdapter
+//            }
+//        }
+//        toolLottoLay.addView(sDelBtn)
+//    }
+//
+//    private fun dbReset() {
+//        for (value in gLottoList) {
+//            val sLottoNum = LottoNum(value.id, "")
+//            gDb.deleteLottoNum(sLottoNum)
+//        }
+//        refreshData()
+//    }
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
     fun View.margin(

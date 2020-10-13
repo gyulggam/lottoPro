@@ -1,5 +1,6 @@
 package com.example.lottopro
 
+import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.GridView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
 import com.example.lottopro.Adapter.ButtonAdapter
@@ -17,6 +19,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.constellation.*
+import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.main.*
 import kotlinx.android.synthetic.main.random_lotto.*
 import kotlinx.android.synthetic.main.main.adView
@@ -27,16 +30,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
+        val sToolbar = lottoHeader as Toolbar?
+        setSupportActionBar(sToolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         MobileAds.initialize(this) {}
         var  mAdView = adView
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
 
-
         // Disable the `NetworkOnMainThreadException` and make sure it is just logged.
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build())
-
 
         // 로또 번호
         var slottoApi = LottoNumberMaker.getNumber()?.toTypedArray()
@@ -44,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         var slottoApiCount = LottoNumberMaker.getCount()
         // 로또 날짜
         var slottoApiData = LottoNumberMaker.getDate().replace("-",".")
-
 
 //        Toast.makeText(applicationContext, "날짜 ${slottoApiData}", Toast.LENGTH_LONG).show()
 
@@ -55,7 +58,6 @@ class MainActivity : AppCompatActivity() {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,
         )
-
 
         linearLayoutBallApi.removeAllViews()
 
@@ -69,7 +71,6 @@ class MainActivity : AppCompatActivity() {
         linearLayoutBallApi.addView(sAddGrid)
         var sAdapter = ButtonAdapter(this, slottoApi)
         sAddGrid.adapter = sAdapter
-
 
         var sIntent = Intent();
         button1.setOnClickListener{
@@ -88,7 +89,9 @@ class MainActivity : AppCompatActivity() {
             sIntent = Intent(this@MainActivity, SelectLottoActivity::class.java)
             startActivity(sIntent);
         }
-
+        viewBackBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {

@@ -7,11 +7,13 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.example.lottopro.DataBase.PatternSelSql
 import com.example.lottopro.DataBase.PatternTypeSql
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.example.lottopro.Str.PatternType
+import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.pattern_type.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import org.json.JSONArray
@@ -28,6 +30,10 @@ class PatternTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree() )
         setContentView(R.layout.pattern_type)
+
+        val sToolbar = lottoHeader as Toolbar?
+        setSupportActionBar(sToolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         var sStr = firstNum.text.toString()
         var sFirstNum = sStr.toInt()
@@ -151,6 +157,10 @@ class PatternTypeActivity : AppCompatActivity() {
 
             val sIntent = Intent(this@PatternTypeActivity, PatternLottoActivity::class.java)
             startActivity(sIntent);
+        }
+
+        viewBackBtn.setOnClickListener {
+            finish()
         }
     }
 }

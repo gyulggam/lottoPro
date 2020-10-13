@@ -8,88 +8,110 @@
     tools:context=".PatternLottoActivity">
 
     <LinearLayout
-        android:id="@+id/patternMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center|center_horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:text="적용 숫자"/>
+        <include layout="@layout/header_lotto"/>
 
         <LinearLayout
-            android:id="@+id/patSelNum"
+            android:id="@+id/patternMain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="150dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@drawable/pattern_layout_border"
-            android:layout_gravity="center|center_horizontal">
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:text="적용 패턴"/>
-
-        <LinearLayout
-            android:id="@+id/patSelPattern"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="@drawable/pattern_layout_border"
-            android:layout_gravity="center|center_horizontal">
-        </LinearLayout>
-
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:numColumns="6"
-            android:id="@+id/createLottoView"/>
-
-        <LinearLayout
-            android:id="@+id/patBtnLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_gravity="center|center_horizontal">
 
-            <Button
-                android:id="@+id/createBtn"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:textColor="#F2F2F2"
-                android:text="번호 생성"
-                android:background="@drawable/save_button" />
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:text="적용 숫자"/>
 
-            <Button
-                android:id="@+id/patternSaveBtn"
+            <LinearLayout
+                android:id="@+id/patSelNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@drawable/pattern_layout_border"
+                android:layout_gravity="center|center_horizontal">
+            </LinearLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#F2F2F2"
-                android:layout_marginLeft="20dp"
-                android:text="번호 저장"
-                android:background="@drawable/save_button" />
-        </LinearLayout>
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:text="적용 패턴"/>
 
+            <LinearLayout
+                android:id="@+id/patSelPattern"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@drawable/pattern_layout_border"
+                android:layout_gravity="center|center_horizontal">
+            </LinearLayout>
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:numColumns="6"
+                android:id="@+id/createLottoView"/>
+
+            <LinearLayout
+                android:id="@+id/patBtnLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center|center_horizontal">
+
+                <Button
+                    android:id="@+id/createBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="fill_horizontal"
+                    android:textColor="#F2F2F2"
+                    android:text="번호 생성"
+                    android:background="@drawable/save_button" />
+
+                <Button
+                    android:id="@+id/patternSaveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F2F2F2"
+                    android:layout_marginLeft="20dp"
+                    android:text="번호 저장"
+                    android:background="@drawable/save_button" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ad_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
@@ -18,8 +19,8 @@ import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.common.util.CollectionUtils
-import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.constellation.*
+import kotlinx.android.synthetic.main.header_lotto.*
 import java.util.ArrayList
 
 
@@ -28,14 +29,15 @@ class RandomLottoActivity : AppCompatActivity() {
     internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
     private var gSelLotto = mutableListOf<Int>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         gDb = SqlHelper(this)
-        setContentView(R.layout.activity_random_lotto)
+        setContentView(R.layout.random_lotto)
 
-        refreshData()
+        val sToolbar = lottoHeader as Toolbar?
+        setSupportActionBar(sToolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         MobileAds.initialize(this) {}
         var  mAdView = adView
@@ -66,8 +68,6 @@ class RandomLottoActivity : AppCompatActivity() {
                     AnimationUtils.loadAnimation(applicationContext, R.anim.overshoot)
                 GridLayoutLayout3.startAnimation(animation)
             }
-
-
         }
 
 //       로또번호저장 버튼의 클릭이벤트 리스너 설정
@@ -80,69 +80,71 @@ class RandomLottoActivity : AppCompatActivity() {
                 val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
 
                 gDb.addLottoNum(sLottoNum)
-                refreshData()
                 Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+        viewBackBtn.setOnClickListener {
+            finish()
+        }
     }
 
-    private fun refreshData() {
-        toolLottoLay.removeAllViews()
-        gLottoList = gDb.gAllLottoNum
-        val sDelBtn = Button(this)
-        val sDelBtnPam =  LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-        toolLottoLay.margin(20F,0F,20F,10F)
-
-        sDelBtnPam.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-        sDelBtnPam.topMargin = 30
-
-        sDelBtn.layoutParams = sDelBtnPam
-        sDelBtn.text = "전체 삭제"
-        sDelBtn.gravity = Gravity.CENTER
-        sDelBtn.background = ContextCompat.getDrawable(this,R.drawable.save_button)
-        sDelBtn.setTextColor(Color.parseColor("#ffffff"))
-
-        sDelBtn.setOnClickListener {
-            dbReset()
-        }
-
-        for ((index, value) in gLottoList.withIndex()) {
-            lateinit var sLottoList : Array<String>
-            val sAddGrid: GridView = GridView(this)
-            val sAddGridPram = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            var sStr = value.number
-
-            sAddGridPram.height = dpToPx(43F)
-            sAddGrid.layoutParams = sAddGridPram
-            sAddGrid.numColumns = 6
-            sAddGrid.background = ContextCompat.getDrawable(this,R.drawable.lotto_grid_view)
-
-            toolLottoLay.addView(sAddGrid)
-
-            if (sStr !== null) {
-                sLottoList= sStr?.split(",").toTypedArray()
-            }
-
-            if (sLottoList != null) {
-                var sAdapter = ButtonAdapter(this, sLottoList)
-
-                sAddGrid.adapter = sAdapter
-            }
-        }
-        toolLottoLay.addView(sDelBtn)
-    }
-    private fun dbReset() {
-        for (value in gLottoList) {
-            val sLottoNum = LottoNum(value.id, "")
-            gDb.deleteLottoNum(sLottoNum)
-        }
-        refreshData()
-    }
+//    private fun refreshData() {
+//        toolLottoLay.removeAllViews()
+//        gLottoList = gDb.gAllLottoNum
+//        val sDelBtn = Button(this)
+//        val sDelBtnPam =  LinearLayout.LayoutParams(
+//            LinearLayout.LayoutParams.WRAP_CONTENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT)
+//        toolLottoLay.margin(20F,0F,20F,10F)
+//
+//        sDelBtnPam.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
+//        sDelBtnPam.topMargin = 30
+//
+//        sDelBtn.layoutParams = sDelBtnPam
+//        sDelBtn.text = "전체 삭제"
+//        sDelBtn.gravity = Gravity.CENTER
+//        sDelBtn.background = ContextCompat.getDrawable(this,R.drawable.save_button)
+//        sDelBtn.setTextColor(Color.parseColor("#ffffff"))
+//
+//        sDelBtn.setOnClickListener {
+//            dbReset()
+//        }
+//
+//        for ((index, value) in gLottoList.withIndex()) {
+//            lateinit var sLottoList : Array<String>
+//            val sAddGrid: GridView = GridView(this)
+//            val sAddGridPram = ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT
+//            )
+//            var sStr = value.number
+//
+//            sAddGridPram.height = dpToPx(43F)
+//            sAddGrid.layoutParams = sAddGridPram
+//            sAddGrid.numColumns = 6
+//            sAddGrid.background = ContextCompat.getDrawable(this,R.drawable.lotto_grid_view)
+//
+//            toolLottoLay.addView(sAddGrid)
+//
+//            if (sStr !== null) {
+//                sLottoList= sStr?.split(",").toTypedArray()
+//            }
+//
+//            if (sLottoList != null) {
+//                var sAdapter = ButtonAdapter(this, sLottoList)
+//
+//                sAddGrid.adapter = sAdapter
+//            }
+//        }
+//        toolLottoLay.addView(sDelBtn)
+//    }
+//    private fun dbReset() {
+//        for (value in gLottoList) {
+//            val sLottoNum = LottoNum(value.id, "")
+//            gDb.deleteLottoNum(sLottoNum)
+//        }
+//        refreshData()
+//    }
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
     fun View.margin(left: Float? = null, top: Float? = null, right: Float? = null, bottom: Float? = null) {
