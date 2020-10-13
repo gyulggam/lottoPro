@@ -7,13 +7,6 @@
     android:background="@drawable/header_text"
     android:id="@+id/lottoHeader">
 
-    <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/back_button"
-        android:id="@+id/viewBackBtn">
-    </ImageButton>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

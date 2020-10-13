@@ -64,8 +64,8 @@ class MainActivity : AppCompatActivity() {
 
 //        Toast.makeText(applicationContext, "날짜 ${slottoApiData}", Toast.LENGTH_LONG).show()
 
-        textView1.setText("$slottoApiData")
-        textView2.setText("${slottoApiCount}회차")
+        textView1.text = "$slottoApiData"
+        textView2.text = "${slottoApiCount}회차"
 
         val sAddGridPram = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -101,9 +101,6 @@ class MainActivity : AppCompatActivity() {
         button4.setOnClickListener{
             sIntent = Intent(this@MainActivity, SelectLottoActivity::class.java)
             startActivity(sIntent);
-        }
-        viewBackBtn.setOnClickListener {
-            finish()
         }
     }
 

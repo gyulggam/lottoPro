@@ -15,7 +15,7 @@
         android:background="#ffffff"
         android:orientation="vertical">
 
-        <include layout="@layout/header_lotto"/>
+        <include layout="@layout/main_header_lotto"/>
 
         <LinearLayout
             android:id="@+id/linearLayoutTop"
