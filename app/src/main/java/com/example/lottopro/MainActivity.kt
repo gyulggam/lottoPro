@@ -27,7 +27,6 @@ import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_select_lotto.*
 import kotlinx.android.synthetic.main.constellation.*
 import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.main.*
@@ -35,13 +34,14 @@ import kotlinx.android.synthetic.main.random_lotto.*
 import kotlinx.android.synthetic.main.main.adView
 
 class MainActivity : AppCompatActivity() {
-
-    internal lateinit var  gDb: SqlHelper
-    internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
+    private lateinit var  gDb: SqlHelper
+    private var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
+
+        gDb = SqlHelper(this)
 
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshData() {
-
         val sAddGridPram = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
