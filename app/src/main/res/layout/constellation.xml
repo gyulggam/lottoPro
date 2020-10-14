@@ -26,12 +26,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/mainText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingVertical="10dp"
                     android:paddingRight="25dp"
                     android:text="나의 별자리 운에 맡겨보세요!"
                     android:textColor="#111111"
@@ -43,14 +41,14 @@
                 <ImageView
                     android:id="@+id/constellationView"
                     android:layout_width="130dp"
-                    android:layout_height="130dp"
+                    android:layout_height="110dp"
                     android:background="@drawable/constellation" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center_vertical">
 
                 <LinearLayout
@@ -98,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:paddingHorizontal="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:columnWidth="30dp"
                 android:stretchMode="columnWidth">
             </GridLayout>
@@ -107,7 +105,7 @@
                 android:id="@+id/linearLayoutBottom"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginTop="35dp">
+                android:layout_marginTop="40dp">
 
                 <Button
                     android:id="@+id/goResultButton"

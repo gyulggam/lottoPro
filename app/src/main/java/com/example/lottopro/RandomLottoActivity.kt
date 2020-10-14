@@ -38,6 +38,7 @@ class RandomLottoActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        headerText.text = "랜덤로또"
 
         MobileAds.initialize(this) {}
         var  mAdView = adView

@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
             ViewGroup.LayoutParams.WRAP_CONTENT,
         )
 
-
         linearLayoutBallApi.removeAllViews()
 
         val sAddGrid: GridView = GridView(this)

@@ -39,6 +39,7 @@ class ConstellationActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        headerText.text = "별자리로또"
 
         //mainText 색변경
         var sMainStr = mainText.text.toString()

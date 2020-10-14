@@ -19,32 +19,88 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|top"
+            android:paddingHorizontal="30dp"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/selectTopLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="bottom">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp">
+                        <TextView
+                            android:id="@+id/selectTopLayoutText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="25dp"
+                            android:text="자신의 촉을"
+                            android:textColor="#111111"
+                            android:textSize="25dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:paddingRight="30dp">
+                        <TextView
+                            android:id="@+id/selectTopLayoutText2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="25dp"
+                            android:text="믿어보세요!"
+                            android:textColor="#111111"
+                            android:textSize="25dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/constellationView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/select_image"/>
+            </LinearLayout>
 
             <GridLayout
                 android:id="@+id/lottoGridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"></GridLayout>
+                android:layout_marginTop="40dp"
+                android:useDefaultMargins="true"
+                android:gravity="center">
+            </GridLayout>
 
             <GridView
                 android:id="@+id/selLottoView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="50dp" />
+                android:layout_marginTop="20dp"
+                android:background="@drawable/select_lotto_view_back"
+                android:columnWidth="25dp"
+                android:horizontalSpacing="20dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="15dp" />
 
             <Button
                 android:id="@+id/saveBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
                 android:textColor="#F2F2F2"
+                android:text="로또번호저장"
                 android:background="@drawable/save_button" />
         </LinearLayout>
     </LinearLayout>

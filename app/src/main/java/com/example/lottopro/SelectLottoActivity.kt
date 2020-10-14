@@ -4,6 +4,9 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -18,6 +21,7 @@ import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Adapter.SelectButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
+import kotlinx.android.synthetic.main.constellation.*
 import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import timber.log.Timber
@@ -37,17 +41,28 @@ class SelectLottoActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        headerText.text = "직접로또"
+
+        //mainText 색변경
+        var sMainStr = selectTopLayoutText.text.toString()
+        var sSpannable = SpannableString(sMainStr)
+        var sChangeStr = "자신의 촉"
+        var sStartStr = sMainStr.indexOf(sChangeStr)
+        var sEndStr = sStartStr + sChangeStr.length
+
+        sSpannable.setSpan(ForegroundColorSpan(Color.parseColor("#5E4BE1")), sStartStr, sEndStr, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        selectTopLayoutText.text = sSpannable
+        //mainText 색변경
 
         var gMaxSelLotto = 6
         var gMaxLottoNum = 46
-        var gMaxCol = 7
-        var gMaxRow = 7
+        var gMaxCol = 9
+        var gMaxRow = 5
 
         lottoGridLayout.columnCount = gMaxCol
         lottoGridLayout.rowCount = gMaxRow
 
         selLottoView.numColumns = 6
-        saveBtn.text = "번호 저장"
 
         for (i in 1 until gMaxLottoNum) {
             var sIsClick = false
@@ -57,7 +72,6 @@ class SelectLottoActivity : AppCompatActivity() {
             val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             var sGridParam :GridLayout.LayoutParams
             var sSelBtnAdapter : SelectButtonAdapter
-
 
             val sBtn = ImageButton(this).apply {
                 this.setOnClickListener {

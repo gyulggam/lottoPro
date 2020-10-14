@@ -45,6 +45,7 @@ class PatternLottoActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        headerText.text = "패턴로또"
 
         var sPatternSelectNum = gPatternDb.gPatternSelNum
         var sPatternType = gPatternTypeDb.gPatternType
