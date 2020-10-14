@@ -69,7 +69,7 @@ object LottoNumberMaker {
                 contents = doc.select("#drwtNo$i")
                 arrayList.add(contents.text()) // 당첨번호 1번 ~ 6번
                 if(i == 6){
-                    arrayList.add("+")
+                    arrayList.add("0")
                 }
             }
             contents = doc.select("#bnusNo")

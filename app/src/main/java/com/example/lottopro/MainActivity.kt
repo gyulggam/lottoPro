@@ -76,21 +76,37 @@ class MainActivity : AppCompatActivity() {
 
 
         var sIntent = Intent()
+        button1_layout.setOnClickListener{
+            sIntent = Intent(this@MainActivity, ConstellationActivity::class.java)
+            startActivity(sIntent)
+        }
         button1.setOnClickListener{
             sIntent = Intent(this@MainActivity, ConstellationActivity::class.java)
+            startActivity(sIntent)
+        }
+        button2_layout.setOnClickListener{
+            sIntent = Intent(this@MainActivity, RandomLottoActivity::class.java)
             startActivity(sIntent)
         }
         button2.setOnClickListener{
             sIntent = Intent(this@MainActivity, RandomLottoActivity::class.java)
             startActivity(sIntent)
         }
+        button3_layout.setOnClickListener{
+            sIntent = Intent(this@MainActivity, PatternLottoActivity::class.java)
+            startActivity(sIntent)
+        }
         button3.setOnClickListener{
             sIntent = Intent(this@MainActivity, PatternLottoActivity::class.java)
             startActivity(sIntent)
         }
-        button4.setOnClickListener{
+        button4_layout.setOnClickListener{
             sIntent = Intent(this@MainActivity, SelectLottoActivity::class.java)
             startActivity(sIntent);
+        }
+        button4.setOnClickListener{
+            sIntent = Intent(this@MainActivity, SelectLottoActivity::class.java)
+            startActivity(sIntent)
         }
     }
 

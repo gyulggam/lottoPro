@@ -19,52 +19,75 @@
             android:layout_height="250dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/linearLayoutLayout2">
+            <TextView
+                android:id="@+id/mainText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="랜덤으로 \n번호를 뽑아보세요!"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="60dp"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                >
+
+            </TextView>
+
             <ImageView
                 android:id="@+id/topImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="16dp"
-                app:srcCompat="@drawable/lotto2"
-                />
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                app:srcCompat="@drawable/ramdom_image" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/linearLayoutLayout2"
+            android:id="@+id/preLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/GridLayoutLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutLayout1">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="16dp"
-                app:srcCompat="@drawable/virgo"
-                />
-
-            <TextView
-                android:id="@+id/textView"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/preramdom_conner"
+            android:padding="10dp"
+            >
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="이게 텍스트야~"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="32dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:textSize="25dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textStyle="bold"
-                />
+                android:textColor="#3F3D55"
+                android:text="이전번호">
+            </TextView>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:text="저장"
+                android:textColor="#5E4BE1"
+                ></TextView>
+            </LinearLayout>
+            <GridLayout
+            android:id="@+id/preGridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            >
+            </GridLayout>
+
         </LinearLayout>
 
         <GridLayout
             android:id="@+id/GridLayoutLayout3"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:paddingHorizontal="50dp"
-            android:paddingVertical="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutLayout2">
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom">
 
         </GridLayout>
 
@@ -72,15 +95,18 @@
         <LinearLayout
             android:id="@+id/linearLayoutBottom"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             app:layout_constraintBottom_toTopOf="@+id/ad_view_container"
             app:layout_constraintTop_toBottomOf="@+id/GridLayoutLayout3">
             <Button
                 android:id="@+id/goResultButton"
-                android:layout_width="175dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="로또번호뽑기"
+                android:stateListAnimator="@null"
+                android:textColor="#000000"
+                android:background="@drawable/create_btn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -90,6 +116,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="번호저장하기"
+                android:textStyle="bold"
+                android:stateListAnimator="@null"
+                android:textColor="#ffffff"
+                android:background="@drawable/save_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </LinearLayout>
