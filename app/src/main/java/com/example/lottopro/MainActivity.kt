@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.main.*
 
 
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main)
 
         gDb = SqlHelper(this)
+
+        val sToolbar = lottoHeader as Toolbar?
+        setSupportActionBar(sToolbar)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
 
         MobileAds.initialize(this) {}
         var  mAdView = adView
