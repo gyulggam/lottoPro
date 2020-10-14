@@ -3,6 +3,9 @@ package com.example.lottopro
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -35,6 +38,18 @@ class RandomLottoActivity : AppCompatActivity() {
         gDb = SqlHelper(this)
         setContentView(R.layout.random_lotto)
 
+        //mainText 색변경
+        var sMainStr = mainText.text.toString()
+        var sSpannable = SpannableString(sMainStr)
+        var sChangeStr = "랜덤"
+        var sStartStr = sMainStr.indexOf(sChangeStr)
+        var sEndStr = sStartStr + sChangeStr.length
+
+        sSpannable.setSpan(ForegroundColorSpan(Color.parseColor("#5E4BE1")), sStartStr, sEndStr, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        mainText.text = sSpannable
+        //mainText 색변경
+
+
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
@@ -64,9 +79,9 @@ class RandomLottoActivity : AppCompatActivity() {
 
                 sGridParam = GridLayout.LayoutParams(sRow, sCol)
                 GridLayoutLayout3.addView(sBtn, sGridParam)
-                val animation: Animation =
-                    AnimationUtils.loadAnimation(applicationContext, R.anim.overshoot)
-                GridLayoutLayout3.startAnimation(animation)
+//                val animation: Animation =
+//                    AnimationUtils.loadAnimation(applicationContext, R.anim.overshoot)
+//                GridLayoutLayout3.startAnimation(animation)
             }
         }
 

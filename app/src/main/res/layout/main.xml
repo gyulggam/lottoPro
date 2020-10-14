@@ -116,6 +116,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/button1_layout"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginHorizontal="5dp"
@@ -133,6 +134,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/button2_layout"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginHorizontal="5dp"
@@ -150,6 +152,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/button3_layout"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginHorizontal="5dp"
@@ -167,6 +170,7 @@
                 </Button>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/button4_layout"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginHorizontal="5dp"
@@ -261,9 +265,10 @@
             android:orientation="vertical"
             >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -292,6 +297,19 @@
                     android:textStyle="bold"
                     >
                 </TextView>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="top"
+                    android:background="@drawable/more_btn">
+
+                </Button>
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
