@@ -31,15 +31,12 @@ object LottoNumberMaker {
 
         sLottoNumbers.sort()
         return sLottoNumbers
-
     }
 
 //     랜덤으로 1 ~ 45 번호 중 하나의 번호를 생성하는 함수
     fun getRandLottoNumber(): Int {
-    return Random().nextInt(45) + 1
+        return Random().nextInt(45) + 1
     }
-
-
 
 
     //    shuffle 을 사용해 로또 번호 생성
