@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.random_lotto.*
 import java.util.ArrayList
 
-
 class RandomLottoActivity : AppCompatActivity() {
     internal lateinit var  gDb: SqlHelper
     internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
@@ -54,7 +53,6 @@ class RandomLottoActivity : AppCompatActivity() {
         sSpannable.setSpan(ForegroundColorSpan(Color.parseColor("#5E4BE1")), sStartStr, sEndStr, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         mainText.text = sSpannable
         //mainText 색변경
-
 
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)

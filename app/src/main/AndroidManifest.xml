@@ -32,6 +32,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".PatternTypeActivity"
             android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SaveLottoActivity"
+            android:parentActivityName=".MainActivity"/>
 
 
 

@@ -40,22 +40,17 @@ class MainActivity : AppCompatActivity() {
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
 
-
         // Disable the `NetworkOnMainThreadException` and make sure it is just logged.
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog()
             .build())
 
-
         // 로또 번호
         var slottoApi = LottoNumberMaker.getNumber()?.toTypedArray()
-
-
 
         // 로또 회차
         var slottoApiCount = LottoNumberMaker.getCount()
         // 로또 날짜
         var slottoApiData = LottoNumberMaker.getDate().replace("-", ".")
-
 
 //        Toast.makeText(applicationContext, "날짜 ${slottoApi}", Toast.LENGTH_LONG).show()
 
@@ -112,6 +107,10 @@ class MainActivity : AppCompatActivity() {
         }
         button4.setOnClickListener{
             sIntent = Intent(this@MainActivity, SelectLottoActivity::class.java)
+            startActivity(sIntent)
+        }
+        more_btn.setOnClickListener{
+            sIntent = Intent(this@MainActivity, SaveLottoActivity::class.java)
             startActivity(sIntent)
         }
     }
