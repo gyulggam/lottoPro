@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreviousRoundsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <include layout="@layout/header_lotto" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이전 회차 번호 입니다."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로또번호 최대 5회차까지 보여집니다."/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/top_banner1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#5E4BE1"
+                android:orientation="horizontal"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent">
+                    <GridView
+                        android:id="@+id/LottoGridView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="6">
+                    </GridView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginHorizontal="20dp">
+                <GridView
+                    android:id="@+id/LottoGridViewR1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="2"
+                    >
+
+                </GridView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/top_banner2"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#5E4BE1"
+                android:orientation="horizontal"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/LottoGridView2"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent">
+                    <GridView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="6">
+                    </GridView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginHorizontal="20dp">
+                    <GridView
+                        android:id="@+id/LottoGridViewR2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:numColumns="2"
+                        >
+
+                    </GridView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/top_banner3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#5E4BE1"
+                android:orientation="horizontal"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/LottoGridView3"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent">
+                    <GridView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="6">
+                    </GridView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginHorizontal="20dp">
+                    <GridView
+                        android:id="@+id/LottoGridViewR3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:numColumns="2"
+                        >
+
+                    </GridView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/top_banner4"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#5E4BE1"
+                android:orientation="horizontal"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/LottoGridView4"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent">
+                    <GridView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="6">
+                    </GridView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginHorizontal="20dp">
+                    <GridView
+                        android:id="@+id/LottoGridViewR4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:numColumns="2"
+                        >
+
+                    </GridView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/top_banner5"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#5E4BE1"
+                android:orientation="horizontal"
+                >
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/LottoGridView5"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent">
+                    <GridView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:numColumns="6">
+                    </GridView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginHorizontal="20dp">
+                    <GridView
+                        android:id="@+id/LottoGridViewR5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:numColumns="2"
+                        >
+
+                    </GridView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ad_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

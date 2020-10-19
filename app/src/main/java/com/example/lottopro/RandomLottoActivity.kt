@@ -23,7 +23,13 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.common.util.CollectionUtils
 import kotlinx.android.synthetic.main.constellation.*
+import kotlinx.android.synthetic.main.constellation.GridLayoutLayout3
+import kotlinx.android.synthetic.main.constellation.adView
+import kotlinx.android.synthetic.main.constellation.goResultButton
+import kotlinx.android.synthetic.main.constellation.goSaveButton
+import kotlinx.android.synthetic.main.constellation.mainText
 import kotlinx.android.synthetic.main.header_lotto.*
+import kotlinx.android.synthetic.main.random_lotto.*
 import java.util.ArrayList
 
 
@@ -31,7 +37,7 @@ class RandomLottoActivity : AppCompatActivity() {
     internal lateinit var  gDb: SqlHelper
     internal var gLottoList:List<LottoNum> = ArrayList<LottoNum>()
     private var gSelLotto = mutableListOf<Int>()
-
+    private var gPreSelLotto = mutableListOf<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,11 +66,17 @@ class RandomLottoActivity : AppCompatActivity() {
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
 
+
+
+        var sStatus = 0
 //        로또 번호 확인 버튼의 클릭이벤트 리스너 설정
         goResultButton.setOnClickListener{
             GridLayoutLayout3.removeAllViewsInLayout()
-            gSelLotto = LottoNumberMaker.getRandomLottoNumbers()
+            preGridLayout.removeAllViewsInLayout()
 
+            gPreSelLotto = gSelLotto
+            gSelLotto = LottoNumberMaker.getRandomLottoNumbers()
+            var sPreGridParam: GridLayout.LayoutParams
             for (i in 1.. 6) {
                 GridLayoutLayout3.columnCount = 6
                 GridLayoutLayout3.rowCount = 1
@@ -80,10 +92,33 @@ class RandomLottoActivity : AppCompatActivity() {
 
                 sGridParam = GridLayout.LayoutParams(sRow, sCol)
                 GridLayoutLayout3.addView(sBtn, sGridParam)
+
+                // 이전회차 추가
+                if(sStatus == 1){
+
+                    preGridLayout.columnCount = 6
+                    preGridLayout.rowCount = 1
+                    preGridLayout.useDefaultMargins = true
+                    val sPreCol: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+                    val sPreRow: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+                    var sPreGridParam: GridLayout.LayoutParams
+                    val sPreBall = "ball_"+gPreSelLotto[i-1]
+                    val sPreBtn = ImageButton(this)
+
+                    sPreBtn.setBackgroundResource(resources.getIdentifier(sPreBall,"drawable", packageName))
+                    sPreBtn.foregroundGravity = Gravity.CENTER_HORIZONTAL
+
+                    sPreGridParam = GridLayout.LayoutParams(sPreRow, sPreCol)
+                    preGridLayout.addView(sPreBtn, sPreGridParam)
+                }
+
+
 //                val animation: Animation =
 //                    AnimationUtils.loadAnimation(applicationContext, R.anim.overshoot)
 //                GridLayoutLayout3.startAnimation(animation)
             }
+
+            sStatus = 1
         }
 
 //       로또번호저장 버튼의 클릭이벤트 리스너 설정
@@ -99,6 +134,21 @@ class RandomLottoActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+
+//       이전로또번호저장 버튼의 클릭이벤트 리스너 설정
+        goPreSaveButton.setOnClickListener{
+            if(CollectionUtils.isEmpty(gPreSelLotto)){
+                Toast.makeText(applicationContext, "번호를 뽑아주세요!", Toast.LENGTH_SHORT).show()
+            }else{
+
+                val sStrArray = gPreSelLotto.map{ it.toString() }.toTypedArray()
+                val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
+
+                gDb.addLottoNum(sLottoNum)
+                Toast.makeText(applicationContext, "로또번호를 저장했습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         viewBackBtn.setOnClickListener {
             finish()
         }
