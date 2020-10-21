@@ -116,7 +116,7 @@ class PatternLottoActivity : AppCompatActivity() {
                         )
 
                         sGridSpacePram = GridLayout.LayoutParams(sRow, sCol)
-                        sGridSpace.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        sGridSpace.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT)
                         sGridSpace.addView(sBtn, sGridSpacePram)
                     }
@@ -230,6 +230,11 @@ class PatternLottoActivity : AppCompatActivity() {
                 sFiveNum++
             }
             fiveNum.text = sFiveNum.toString()
+        }
+
+        createBtn.setOnClickListener {
+            var sStr = "${sFirstNum},${sSecondNum},${sThirdNum},${sFourthNum},${sFiveNum}"
+            createPatternLotto(sPatternSelectNum, sStr)
         }
     }
 
