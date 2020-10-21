@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.lottopro.Str.LottoNum
+import java.util.ArrayList
 
-
-class SelectButtonAdapter(private val aContext: Context, internal val aLottoNum: MutableList<Int>) : BaseAdapter() {
-    private val sTotalBtn = aLottoNum.size
+class PatternButtonAdapter(private val aContext: Context, internal val aLottoNum: Array<String>?) : BaseAdapter() {
+    private val sTotalBtn = aLottoNum!!.size
 
     override fun getCount(): Int {
         return sTotalBtn
@@ -24,7 +24,7 @@ class SelectButtonAdapter(private val aContext: Context, internal val aLottoNum:
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
         val sBtn: ImageButton
-        var sBall = "pattern_${aLottoNum[i]}"
+        var sBall = "pattern_${aLottoNum?.get(i)}"
 
         if (view == null) {
             sBtn = ImageButton(aContext)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,62 +18,46 @@
             android:id="@+id/patternMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="30dp"
             android:orientation="vertical"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_gravity="center|center_horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="20dp"
-                android:text="적용 숫자"/>
-
             <LinearLayout
-                android:id="@+id/patSelNum"
+                android:id="@+id/selectTopLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="150dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/pattern_layout_border"
-                android:layout_gravity="center|center_horizontal">
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="20dp"
-                android:text="적용 패턴"/>
+                android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/patSelPattern"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/pattern_layout_border"
-                android:layout_gravity="center|center_horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/patTopLayoutText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingRight="50dp"
+                        android:layout_weight="2"
+                        android:gravity="bottom"
+                        android:text="패턴으로 확률을 높혀 보세요!"
+                        android:textColor="#111111"
+                        android:textSize="25dp" />
+
+                    <ImageView
+                        android:id="@+id/constellationView"
+                        android:layout_width="110dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/pattern_image" />
+                </LinearLayout>
             </LinearLayout>
-
-            <GridView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:numColumns="6"
-                android:id="@+id/createLottoView"/>
 
             <LinearLayout
                 android:id="@+id/patBtnLine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_gravity="center|center_horizontal">
@@ -83,35 +67,350 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="fill_horizontal"
-                    android:textColor="#F2F2F2"
+                    android:textColor="#111111"
+                    android:stateListAnimator="@null"
                     android:text="번호 생성"
-                    android:background="@drawable/save_button" />
+                    android:background="@drawable/create_btn" />
 
                 <Button
                     android:id="@+id/patternSaveBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#F2F2F2"
+                    android:stateListAnimator="@null"
                     android:layout_marginLeft="20dp"
                     android:text="번호 저장"
                     android:background="@drawable/save_button" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/patSelNumLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/pattern_layout_border"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bottom_black_stroke"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:text="적용 숫자"
+                        android:textStyle="bold"
+                        android:textColor="#5E4BE1"
+                        android:textSize="17dp"/>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/patSelBtn">
+                        <Button
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/plus_btn">
+                        </Button>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="bottom"
+                            android:textStyle="bold"
+                            android:text="추가하기">
+                        </TextView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:id="@+id/patSelNumSC">
+                    <LinearLayout
+                        android:id="@+id/patSelNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="2dp"
+                        android:orientation="vertical">
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/patSelPatternLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#111111"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="01-11">
+                    </TextView>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#111111"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="11-20">
+                    </TextView>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#111111"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="21-30">
+                    </TextView>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#111111"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="31-40">
+                    </TextView>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#111111"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="41-45">
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <Button
+                        android:id="@+id/firstUp"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/up_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/secondUp"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/up_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/thirdUp"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/up_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/fourthUp"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/up_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/fiveUp"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/up_btn">
+                    </Button>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <Button
+                        android:id="@+id/firstNum"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:stateListAnimator="@null"
+                        android:background="@drawable/pattern_type_btn"
+                        android:text="0">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/secondNum"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:stateListAnimator="@null"
+                        android:background="@drawable/pattern_type_btn"
+                        android:text="0">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/thirdNum"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:stateListAnimator="@null"
+                        android:background="@drawable/pattern_type_btn"
+                        android:text="0">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/fourthNum"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:stateListAnimator="@null"
+                        android:background="@drawable/pattern_type_btn"
+                        android:text="0">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/fiveNum"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:stateListAnimator="@null"
+                        android:background="@drawable/pattern_type_btn"
+                        android:text="0">
+                    </Button>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <Button
+                        android:id="@+id/firstDown"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/down_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/secondDown"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/down_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/thirdDown"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/down_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/fourthDown"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/down_btn">
+                    </Button>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                    <Button
+                        android:id="@+id/fiveDown"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/down_btn">
+                    </Button>
+                </LinearLayout>
+            </LinearLayout>
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="6"
+                android:horizontalSpacing="10dp"
+                android:paddingHorizontal="40dp"
+                android:paddingVertical="15dp"
+                android:background="@drawable/select_lotto_view_back"
+                android:id="@+id/createLottoView"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ad_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:adSize="BANNER"
+                app:adUnitId="ca-app-pub-3940256099942544/6300978111">
+            </com.google.android.gms.ads.AdView>
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ad_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111">
-        </com.google.android.gms.ads.AdView>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -13,15 +16,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.Adapter.PatternButtonAdapter
 import com.example.lottopro.DataBase.PatternSelSql
 import com.example.lottopro.DataBase.PatternTypeSql
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.example.lottopro.Str.PatternSelNum
-import com.example.lottopro.Str.PatternType
-import com.google.android.gms.common.config.GservicesValue.value
 import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.pattern.*
+import kotlinx.android.synthetic.main.pattern.firstDown
+import kotlinx.android.synthetic.main.pattern.firstUp
+import kotlinx.android.synthetic.main.pattern.fiveDown
+import kotlinx.android.synthetic.main.pattern.fiveUp
+import kotlinx.android.synthetic.main.pattern.fourthDown
+import kotlinx.android.synthetic.main.pattern.fourthUp
+import kotlinx.android.synthetic.main.pattern.secondDown
+import kotlinx.android.synthetic.main.pattern.secondUp
+import kotlinx.android.synthetic.main.pattern.thirdDown
+import kotlinx.android.synthetic.main.pattern.thirdUp
 import kotlinx.android.synthetic.main.select_lotto.*
 import org.json.JSONObject
 import timber.log.Timber
@@ -31,7 +43,6 @@ import kotlin.collections.ArrayList
 class PatternLottoActivity : AppCompatActivity() {
     private lateinit var gDb: SqlHelper
     private lateinit var gPatternDb: PatternSelSql
-    private lateinit var gPatternTypeDb : PatternTypeSql
     private var gIntResultLotto = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +50,6 @@ class PatternLottoActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree() )
         gDb = SqlHelper(this)
         gPatternDb = PatternSelSql(this)
-        gPatternTypeDb = PatternTypeSql(this)
         setContentView(R.layout.pattern)
 
         val sToolbar = lottoHeader as Toolbar?
@@ -47,8 +57,18 @@ class PatternLottoActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowCustomEnabled(true)
         headerText.text = "패턴로또"
 
+        //mainText 색변경
+        var sMainStr = patTopLayoutText.text.toString()
+        var sSpannable = SpannableString(sMainStr)
+        var sChangeStr = "확률"
+        var sStartStr = sMainStr.indexOf(sChangeStr)
+        var sEndStr = sStartStr + sChangeStr.length
+
+        sSpannable.setSpan(ForegroundColorSpan(Color.parseColor("#5E4BE1")), sStartStr, sEndStr, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        patTopLayoutText.text = sSpannable
+        //mainText 색변경
+
         var sPatternSelectNum = gPatternDb.gPatternSelNum
-        var sPatternType = gPatternTypeDb.gPatternType
 
         var gMaxCol = 7
         var gMaxRow = 7
@@ -56,12 +76,22 @@ class PatternLottoActivity : AppCompatActivity() {
         val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
         val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
         var sGridSpacePram : GridLayout.LayoutParams
+        var sStr = firstNum.text.toString()
+        var sFirstNum = sStr.toInt()
+        sStr = secondNum.text.toString()
+        var sSecondNum = sStr.toInt()
+        sStr = thirdNum.text.toString()
+        var sThirdNum = sStr.toInt()
+        sStr = fourthNum.text.toString()
+        var sFourthNum = sStr.toInt()
+        sStr = fiveNum.text.toString()
 
-        patSelNum.setPadding(30,25,30,25)
-        patSelPattern.setPadding(30,25,30,25)
+        var sTotalNum = 0
+        var sFiveNum = sStr.toInt()
 
         sGridSpace.columnCount = gMaxCol
         sGridSpace.rowCount = gMaxRow
+        sGridSpace.useDefaultMargins = true
 
         patSelNum.addView(sGridSpace)
 
@@ -74,45 +104,29 @@ class PatternLottoActivity : AppCompatActivity() {
                     sSelectList= sStr?.split(",").toTypedArray()
 
                     for (selVal in sSelectList) {
-                        var sBall = "ball_$selVal"
+                        var sBall = "pattern_un_$selVal"
                         val sBtn = ImageButton(this)
 
                         sBtn.setBackgroundResource(
                             resources.getIdentifier(sBall, "drawable", packageName)
                         )
                         sBtn.layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.MATCH_PARENT
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
                         )
 
                         sGridSpacePram = GridLayout.LayoutParams(sRow, sCol)
+                        sGridSpace.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT)
                         sGridSpace.addView(sBtn, sGridSpacePram)
                     }
                 }
             }
         }
 
-        if (sPatternType !== null) {
-            for((index,value) in sPatternType.withIndex()) {
-                val sPatternText = TextView(this)
-                sPatternText.text = value.type.toString()
-                sPatternText.textSize = 20F
-                patSelPattern.addView(sPatternText)
-            }
-        }
-
-        patSelNum.setOnClickListener{
+        patSelBtn.setOnClickListener{
             val sIntent = Intent(this@PatternLottoActivity, PatternSelectLottoActivity::class.java  )
             startActivity(sIntent);
-        }
-
-        patSelPattern.setOnClickListener{
-            val sIntent = Intent(this@PatternLottoActivity, PatternTypeActivity::class.java  )
-            startActivity(sIntent);
-        }
-
-        createBtn.setOnClickListener {
-            createPatternLotto(sPatternSelectNum, sPatternType)
         }
 
         patternSaveBtn.setOnClickListener {
@@ -122,36 +136,141 @@ class PatternLottoActivity : AppCompatActivity() {
         viewBackBtn.setOnClickListener {
             finish()
         }
+
+        firstDown.setOnClickListener {
+            if (sTotalNum > 0 && sFirstNum > 0) {
+                sTotalNum--
+                println("sTotalNum ::::: $sTotalNum")
+            }
+            if (sFirstNum > 0) {
+                sFirstNum--
+            }
+            firstNum.text = sFirstNum.toString()
+        }
+
+        firstUp.setOnClickListener {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+                sTotalNum++
+                sFirstNum++
+            }
+            firstNum.text = sFirstNum.toString()
+        }
+
+        secondDown.setOnClickListener {
+            if (sTotalNum > 0 && sSecondNum > 0) {
+                sTotalNum--
+            }
+            if (sSecondNum > 0) {
+                sSecondNum--
+            }
+            secondNum.text = sSecondNum.toString()
+        }
+
+        secondUp.setOnClickListener {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+                sTotalNum++
+                sSecondNum++
+            }
+            secondNum.text = sSecondNum.toString()
+        }
+
+        thirdDown.setOnClickListener {
+            if (sTotalNum > 0 && sThirdNum > 0) {
+                sTotalNum--
+                println("sTotalNum ::::: $sTotalNum")
+            }
+            if (sThirdNum > 0) {
+                sThirdNum--
+            }
+            thirdNum.text = sThirdNum.toString()
+        }
+
+        thirdUp.setOnClickListener {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+                sTotalNum++
+                sThirdNum++
+            }
+            thirdNum.text = sThirdNum.toString()
+        }
+
+        fourthDown.setOnClickListener {
+            if (sTotalNum > 0 && sFourthNum > 0) {
+                sTotalNum--
+                println("sTotalNum ::::: $sTotalNum")
+            }
+            if (sFourthNum > 0) {
+                sFourthNum--
+            }
+            fourthNum.text = sFourthNum.toString()
+        }
+
+        fourthUp.setOnClickListener {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+                sTotalNum++
+                sFourthNum++
+            }
+            fourthNum.text = sFourthNum.toString()
+        }
+
+        fiveDown.setOnClickListener {
+            if (sTotalNum > 0 && sFiveNum > 0) {
+                sTotalNum--
+                println("sTotalNum ::::: $sTotalNum")
+            }
+
+            if (sFiveNum > 0) {
+                sFiveNum--
+            }
+            fiveNum.text = sFiveNum.toString()
+        }
+
+        fiveUp.setOnClickListener {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+                sTotalNum++
+                sFiveNum++
+            }
+            fiveNum.text = sFiveNum.toString()
+        }
     }
 
     private fun saveBtn() {
         val sStrArray = gIntResultLotto.map{ it.toString() }.toTypedArray()
+        if (sStrArray.joinToString(",") == "" || sStrArray.joinToString(",") == null) {
+            Toast.makeText(applicationContext, "번호를 생성해 주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
         val sLottoNum = LottoNum(0, sStrArray.joinToString(","))
+
 
         gDb.addLottoNum(sLottoNum)
         Toast.makeText(applicationContext, "저장 되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
-    private fun createPatternLotto(aSelectArray : List<PatternSelNum>, aPatternList : List<PatternType>) {
+    private fun createPatternLotto(aSelectArray : List<PatternSelNum>, aPatternStr : String) {
         var sSelNumList = aSelectArray[0].number?.split(",")
-        var sPatternNumList = aPatternList[0].type?.split(",")
-        var sOneList = ArrayList<String>()
-        var sTenList = ArrayList<String>()
-        var sTwoList = ArrayList<String>()
-        var sTreeList = ArrayList<String>()
-        var sFourList = ArrayList<String>()
+        var sPatternNumList = aPatternStr.split(",")
+        var sOneList = ArrayList<Int>()
+        var sTenList = ArrayList<Int>()
+        var sTwoList = ArrayList<Int>()
+        var sTreeList = ArrayList<Int>()
+        var sFourList = ArrayList<Int>()
         var sPatternJson = JSONObject()
         gIntResultLotto = ArrayList<Int>()
+
+        if (sSelNumList!![0] == "") {
+            Toast.makeText(applicationContext, "사용할 번호를 선택해 주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         if (sSelNumList !== null) {
             for((index, value) in sSelNumList.withIndex()) {
                 var sVal = value.toInt()
                 when(sVal) {
-                    in 0..10 -> sOneList.add(value)
-                    in 11..20 -> sTenList.add(value)
-                    in 21..30 -> sTwoList.add(value)
-                    in 31..40 -> sTreeList.add(value)
-                    in 41..45 -> sFourList.add(value)
+                    in 0..10 -> sOneList.add(sVal)
+                    in 11..20 -> sTenList.add(sVal)
+                    in 21..30 -> sTwoList.add(sVal)
+                    in 31..40 -> sTreeList.add(sVal)
+                    in 41..45 -> sFourList.add(sVal)
                 }
             }
         }
@@ -166,9 +285,20 @@ class PatternLottoActivity : AppCompatActivity() {
             }
         }
 
+        println("sdfasdf :::: $sPatternJson")
+
         for(i in 1..sPatternJson.getInt("one")) {
-            var sRandom = Random().nextInt(sOneList.size)
-            var sValue : Int = sOneList[sRandom].toInt()
+            var sRandom = 0
+            var sValue  = 0
+
+            if(sOneList.size == 0) {
+                sRandom = (0..11).random()
+                sOneList.add(sRandom)
+                sValue  = sOneList[0].toInt()
+            } else {
+                sRandom = Random().nextInt(sOneList.size)
+                sValue  = sOneList[sRandom].toInt()
+            }
 
             while(gIntResultLotto.indexOf(sValue) > -1) {
                 sValue++
@@ -178,8 +308,17 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         for(i in 1..sPatternJson.getInt("ten")) {
-            var sRandom = Random().nextInt(sTenList.size)
-            var sValue : Int = sTenList[sRandom].toInt()
+            var sRandom = 0
+            var sValue  = 0
+
+            if(sTenList.size == 0) {
+                sRandom = (10..21).random()
+                sTenList.add(sRandom)
+                sValue = sTenList[0].toInt()
+            } else {
+                sRandom = Random().nextInt(sTenList.size)
+                sValue = sTenList[sRandom].toInt()
+            }
 
             while(gIntResultLotto.indexOf(sValue) > -1) {
                 sValue++
@@ -189,8 +328,17 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         for(i in 1..sPatternJson.getInt("two")) {
-            var sRandom = Random().nextInt(sTwoList.size)
-            var sValue : Int = sTwoList[sRandom].toInt()
+            var sRandom = 0
+            var sValue  = 0
+
+            if(sTwoList.size == 0) {
+                sRandom = (20..31).random()
+                sTwoList.add(sRandom)
+                sValue = sTwoList[0].toInt()
+            } else {
+                sRandom = Random().nextInt(sTwoList.size)
+                sValue = sTwoList[sRandom].toInt()
+            }
 
             while(gIntResultLotto.indexOf(sValue) > -1) {
                 sValue++
@@ -200,8 +348,17 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         for(i in 1..sPatternJson.getInt("tree")) {
-            var sRandom = Random().nextInt(sTreeList.size)
-            var sValue : Int = sTreeList[sRandom].toInt()
+            var sRandom = 0
+            var sValue  = 0
+
+            if(sTreeList.size == 0) {
+                sRandom = (30..41).random()
+                sTreeList.add(sRandom)
+                sValue = sTreeList[0].toInt()
+            } else {
+                sRandom = Random().nextInt(sTreeList.size)
+                sValue = sTreeList[sRandom].toInt()
+            }
 
             while(gIntResultLotto.indexOf(sValue) > -1) {
                 sValue++
@@ -211,11 +368,20 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         for(i in 1..sPatternJson.getInt("four")) {
-            var sRandom = Random().nextInt(sFourList.size)
-            var sValue : Int = sFourList[sRandom].toInt()
+            var sRandom = 0
+            var sValue  = 0
+
+            if(sFourList.size == 0) {
+                sRandom = (40..46).random()
+                sFourList.add(sRandom)
+                sValue = sFourList[0].toInt()
+            } else {
+                sRandom = Random().nextInt(sFourList.size)
+                sValue = sFourList[sRandom].toInt()
+            }
 
             while(gIntResultLotto.indexOf(sValue) > -1) {
-                    sValue++
+                sValue++
             }
 
             gIntResultLotto.add(sValue)
@@ -225,7 +391,7 @@ class PatternLottoActivity : AppCompatActivity() {
         val sResultLotto = gIntResultLotto.map { it.toString()}.toTypedArray()
 
         if (sResultLotto != null) {
-            var sAdapter = ButtonAdapter(this, sResultLotto)
+            var sAdapter = PatternButtonAdapter(this, sResultLotto)
             createLottoView.adapter = sAdapter
         }
 

@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.marginTop
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.Adapter.PatternButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import kotlinx.android.synthetic.main.header_lotto.*
@@ -91,7 +92,7 @@ class SaveLottoActivity : AppCompatActivity() {
             }
 
             if (sLottoList != null) {
-                var sAdapter = ButtonAdapter(this, sLottoList)
+                var sAdapter = PatternButtonAdapter(this, sLottoList)
                 sAddGrid.adapter = sAdapter
             }
         }
