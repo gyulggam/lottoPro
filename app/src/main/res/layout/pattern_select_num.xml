@@ -19,43 +19,93 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|top"
+            android:paddingHorizontal="30dp"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/selectTopLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="bottom">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp">
+                        <TextView
+                            android:id="@+id/selectTopLayoutText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="25dp"
+                            android:text="자신의 촉을"
+                            android:textColor="#111111"
+                            android:textSize="25dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:paddingRight="30dp">
+                        <TextView
+                            android:id="@+id/selectTopLayoutText2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="25dp"
+                            android:text="믿어보세요!"
+                            android:textColor="#111111"
+                            android:textSize="25dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/constellationView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/select_image"/>
+            </LinearLayout>
 
             <GridLayout
                 android:id="@+id/lottoGridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"></GridLayout>
+                android:layout_marginTop="40dp"
+                android:useDefaultMargins="true"
+                android:gravity="center">
+            </GridLayout>
 
             <Button
                 android:id="@+id/saveBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="30dp"
                 android:textColor="#F2F2F2"
                 android:background="@drawable/save_button" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ad_view_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/ad_view_container"
-        >
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111">
         </com.google.android.gms.ads.AdView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
