@@ -116,7 +116,7 @@ class PatternLottoActivity : AppCompatActivity() {
                         )
 
                         sGridSpacePram = GridLayout.LayoutParams(sRow, sCol)
-                        sGridSpace.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        sGridSpace.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT)
                         sGridSpace.addView(sBtn, sGridSpacePram)
                     }
