@@ -1,5 +1,9 @@
 package com.example.lottopro
 
+import android.util.Log
+import android.widget.Toast
+import com.google.gson.JsonObject
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
@@ -71,6 +75,67 @@ object LottoNumberMaker {
             }
             contents = doc.select("#bnusNo")
             arrayList.add(contents.text()) // 보너스 번호
+        } catch (e: IOException) {
+            //e.printStackTrace();
+//            Log.d("LottoNum의 getNumber()함수 에러 : ", e.getMessage())
+        }
+        return arrayList
+    }
+
+    fun getPreNumber(i: String?): ArrayList<String>? {
+        var arrayList: ArrayList<String>?
+        arrayList = ArrayList()
+        try {
+
+            val doc: Document = Jsoup.connect("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+i).get()
+            Log.d("doc text:::::::::::::::::::", doc.text()  )
+
+            val docString = doc.text()
+            val docJson = JSONObject(docString)
+
+//            var contents: Elements
+            for (i in 1..6) {
+                var contents = docJson.get("drwtNo$i")
+//                contents = doc.select("#drwtNo$i")
+                arrayList.add(contents.toString()) // 당첨번호 1번 ~ 6번
+            }
+
+        } catch (e: IOException) {
+            //e.printStackTrace();
+//            Log.d("LottoNum의 getNumber()함수 에러 : ", e.getMessage())
+        }
+        return arrayList
+    }
+
+    fun getPreNumberBonus(i: String?): ArrayList<String>? {
+        var arrayList: ArrayList<String>?
+        arrayList = ArrayList()
+        try {
+            val doc: Document = Jsoup.connect("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+i).get()
+
+            val docString = doc.text()
+            val docJson = JSONObject(docString)
+
+            var contents = docJson.get("bnusNo")
+            arrayList.add(contents.toString()) // 보너스 번호
+        } catch (e: IOException) {
+            //e.printStackTrace();
+//            Log.d("LottoNum의 getNumber()함수 에러 : ", e.getMessage())
+        }
+        return arrayList
+    }
+
+    fun getPreCount(i: String?): ArrayList<String>? {
+        var arrayList: ArrayList<String>?
+        arrayList = ArrayList()
+        try {
+            val doc: Document = Jsoup.connect("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+i).get()
+
+            val docString = doc.text()
+            val docJson = JSONObject(docString)
+
+            var contents = docJson.get("drwNo")
+            arrayList.add(contents.toString()) // 보너스 번호
         } catch (e: IOException) {
             //e.printStackTrace();
 //            Log.d("LottoNum의 getNumber()함수 에러 : ", e.getMessage())

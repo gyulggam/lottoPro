@@ -113,6 +113,10 @@ class MainActivity : AppCompatActivity() {
             sIntent = Intent(this@MainActivity, SaveLottoActivity::class.java)
             startActivity(sIntent)
         }
+        pre_button.setOnClickListener{
+            sIntent = Intent(this@MainActivity, PreviousRoundsActivity::class.java)
+            startActivity(sIntent)
+        }
     }
 
     override fun onResume() {

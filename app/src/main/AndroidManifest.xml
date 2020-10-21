@@ -34,7 +34,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".SaveLottoActivity"
             android:parentActivityName=".MainActivity"/>
-
+        <activity android:name=".PreviousRoundsActivity"
+            android:parentActivityName=".MainActivity"/>
 
 
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
