@@ -44,6 +44,9 @@ class PatternSelectLottoActivity : AppCompatActivity() {
         var gMaxLottoNum = 46
         var gMaxCol = 9
         var gMaxRow = 5
+        gPatternList = gPatternDb.gPatternSelNum
+
+        var sPatternSelectList = gPatternList[0].number?.split(',')
 
         lottoGridLayout.columnCount = gMaxCol
         lottoGridLayout.rowCount = gMaxRow
@@ -56,6 +59,8 @@ class PatternSelectLottoActivity : AppCompatActivity() {
             val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             var sGridParam : GridLayout.LayoutParams
+
+            sIsClick = sPatternSelectList?.indexOf(i.toString()) != -1
 
             val sBtn = ImageButton(this).apply {
                 this.setOnClickListener {
@@ -85,7 +90,13 @@ class PatternSelectLottoActivity : AppCompatActivity() {
                 }
             }
 
-            sBtn.setBackgroundResource(resources.getIdentifier(sUnBall, "drawable", packageName))
+            if(sPatternSelectList?.indexOf(i.toString()) != -1) {
+                sBtn.setBackgroundResource(resources.getIdentifier(sBall, "drawable", packageName))
+                gSelLotto.add(i.toInt())
+            } else {
+                sBtn.setBackgroundResource(resources.getIdentifier(sUnBall, "drawable", packageName))
+            }
+
             sBtn.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
@@ -110,7 +121,6 @@ class PatternSelectLottoActivity : AppCompatActivity() {
         }
 
         gSelLotto.sort()
-        gPatternList = gPatternDb.gPatternSelNum
 
         for(value in gPatternList) {
             var sDeletePattern = PatternSelNum(value.id, "")

@@ -85,15 +85,35 @@ class PatternLottoActivity : AppCompatActivity() {
         sStr = fourthNum.text.toString()
         var sFourthNum = sStr.toInt()
         sStr = fiveNum.text.toString()
-
-        var sTotalNum = 0
         var sFiveNum = sStr.toInt()
+        var sTotalNum = 0
+
+        var sOneList = ArrayList<Int>()
+        var sTenList = ArrayList<Int>()
+        var sTwoList = ArrayList<Int>()
+        var sTreeList = ArrayList<Int>()
+        var sFourList = ArrayList<Int>()
 
         sGridSpace.columnCount = gMaxCol
         sGridSpace.rowCount = gMaxRow
         sGridSpace.useDefaultMargins = true
 
         patSelNum.addView(sGridSpace)
+
+        var sSelNumList = sPatternSelectNum[0].number?.split(",")
+
+        if (sSelNumList != null) {
+            for((index, value) in sSelNumList.withIndex()) {
+                var sVal = value.toInt()
+                when(sVal) {
+                    in 0..10 -> sOneList.add(sVal)
+                    in 11..20 -> sTenList.add(sVal)
+                    in 21..30 -> sTwoList.add(sVal)
+                    in 31..40 -> sTreeList.add(sVal)
+                    in 41..45 -> sFourList.add(sVal)
+                }
+            }
+        }
 
         if (sPatternSelectNum != null) {
             for((index, value) in sPatternSelectNum.withIndex()) {
@@ -129,6 +149,11 @@ class PatternLottoActivity : AppCompatActivity() {
             startActivity(sIntent);
         }
 
+        patSelBtnLay.setOnClickListener{
+            val sIntent = Intent(this@PatternLottoActivity, PatternSelectLottoActivity::class.java  )
+            startActivity(sIntent);
+        }
+
         patternSaveBtn.setOnClickListener {
             saveBtn()
         }
@@ -149,7 +174,7 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         firstUp.setOnClickListener {
-            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6 && sOneList.size > sFirstNum) {
                 sTotalNum++
                 sFirstNum++
             }
@@ -167,7 +192,7 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         secondUp.setOnClickListener {
-            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6 && sTenList.size > sSecondNum) {
                 sTotalNum++
                 sSecondNum++
             }
@@ -186,7 +211,7 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         thirdUp.setOnClickListener {
-            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6 && sTwoList.size > sThirdNum) {
                 sTotalNum++
                 sThirdNum++
             }
@@ -205,7 +230,7 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         fourthUp.setOnClickListener {
-            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6 && sTreeList.size > sFourthNum) {
                 sTotalNum++
                 sFourthNum++
             }
@@ -225,7 +250,7 @@ class PatternLottoActivity : AppCompatActivity() {
         }
 
         fiveUp.setOnClickListener {
-            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6) {
+            if ((sFirstNum + sSecondNum + sThirdNum + sFourthNum + sFiveNum) < 6 && sFourList.size > sFiveNum) {
                 sTotalNum++
                 sFiveNum++
             }
@@ -289,8 +314,6 @@ class PatternLottoActivity : AppCompatActivity() {
                 4 -> sPatternJson.put("four", value.toInt())
             }
         }
-
-        println("sdfasdf :::: $sPatternJson")
 
         for(i in 1..sPatternJson.getInt("one")) {
             var sRandom = 0
@@ -395,12 +418,12 @@ class PatternLottoActivity : AppCompatActivity() {
         gIntResultLotto.sort()
         val sResultLotto = gIntResultLotto.map { it.toString()}.toTypedArray()
 
-        if (sResultLotto != null) {
+        if (sResultLotto != null && sResultLotto.size >= 6) {
             var sAdapter = PatternButtonAdapter(this, sResultLotto)
             createLottoView.adapter = sAdapter
+        } else {
+            Toast.makeText(applicationContext, "총 6개의 패턴을 선택해 주세요", Toast.LENGTH_SHORT).show()
         }
-
-        println("sResultLotto ${gIntResultLotto.toString()}")
     }
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
