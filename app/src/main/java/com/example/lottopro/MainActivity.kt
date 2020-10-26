@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.lottopro.Adapter.ButtonAdapter
+import com.example.lottopro.Adapter.SaveLottoAdapter
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.google.android.gms.ads.AdRequest
@@ -74,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         linearLayoutBallApi.addView(sAddGrid)
         var sAdapter = ButtonAdapter(this, slottoApi)
         sAddGrid.adapter = sAdapter
-
 
         var sIntent = Intent()
         button1_layout.setOnClickListener{
@@ -153,7 +153,6 @@ class MainActivity : AppCompatActivity() {
                 sAddGrid.numColumns = 6
                 sAddGrid.background = ContextCompat.getDrawable(this, R.drawable.lotto_grid_view)
 
-
                 sAddGrid.horizontalSpacing = 20
                 saveLottoNum.addView(sAddGrid)
                 if (sStr !== null) {
@@ -161,18 +160,13 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (sLottoList != null) {
-                    var sAdapter = ButtonAdapter(this, sLottoList)
+                    var sAdapter = SaveLottoAdapter(this, sLottoList)
 
                     sAddGrid.adapter = sAdapter
                 }
             }
-
-
-
         }
     }
-
-
 
     // 레이아웃에 마진 적용 할때 쓰는 함수
     fun View.margin(

@@ -25,10 +25,15 @@ class ButtonAdapter(private val aContext: Context, internal val aLottoNum: Array
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
         val sBtn: ImageButton
         var sBall = "ball_${aLottoNum?.get(i)}"
+        var sBonusBall = "bonus_ball_${aLottoNum?.get(i)}"
 
         if (view == null) {
             sBtn = ImageButton(aContext)
-            sBtn.setBackgroundResource(aContext.resources.getIdentifier(sBall,"drawable", aContext.packageName))
+            if(i === 7) {
+                sBtn.setBackgroundResource(aContext.resources.getIdentifier(sBonusBall,"drawable", aContext.packageName))
+            } else {
+                sBtn.setBackgroundResource(aContext.resources.getIdentifier(sBall,"drawable", aContext.packageName))
+            }
         } else {
             sBtn = view as ImageButton
         }

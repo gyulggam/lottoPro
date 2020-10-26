@@ -19,9 +19,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.marginTop
 import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Adapter.PatternButtonAdapter
+import com.example.lottopro.Adapter.StrokeBtnAdapter
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.header_lotto.*
+import kotlinx.android.synthetic.main.pattern.*
 import kotlinx.android.synthetic.main.save_lotto.*
 
 class SaveLottoActivity : AppCompatActivity() {
@@ -41,6 +45,11 @@ class SaveLottoActivity : AppCompatActivity() {
         var sChangeStr = "저장한 번호"
         var sStartStr = sMainStr.indexOf(sChangeStr)
         var sEndStr = sStartStr + sChangeStr.length
+
+        MobileAds.initialize(this) {}
+        var  mAdView = saveAdView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         sSpannable.setSpan(ForegroundColorSpan(Color.parseColor("#5E4BE1")),
             sStartStr,
@@ -92,7 +101,7 @@ class SaveLottoActivity : AppCompatActivity() {
             }
 
             if (sLottoList != null) {
-                var sAdapter = PatternButtonAdapter(this, sLottoList)
+                var sAdapter = StrokeBtnAdapter(this, sLottoList)
                 sAddGrid.adapter = sAdapter
             }
         }

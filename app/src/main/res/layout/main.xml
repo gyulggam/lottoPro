@@ -347,11 +347,7 @@
                 ads:adSize="BANNER"
                 ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
             </com.google.android.gms.ads.AdView>
-
         </LinearLayout>
     </LinearLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

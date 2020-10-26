@@ -101,7 +101,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
+            android:id="@+id/patternSelAdView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:adSize="BANNER"
