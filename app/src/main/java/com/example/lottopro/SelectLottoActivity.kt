@@ -21,8 +21,11 @@ import com.example.lottopro.Adapter.ButtonAdapter
 import com.example.lottopro.Adapter.SelectButtonAdapter
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.constellation.*
 import kotlinx.android.synthetic.main.header_lotto.*
+import kotlinx.android.synthetic.main.save_lotto.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import timber.log.Timber
 
@@ -42,6 +45,11 @@ class SelectLottoActivity : AppCompatActivity() {
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
         headerText.text = "직접로또"
+
+        MobileAds.initialize(this) {}
+        var  mAdView = selectAdView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         //mainText 색변경
         var sMainStr = selectTopLayoutText.text.toString()

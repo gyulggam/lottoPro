@@ -69,7 +69,7 @@ class ConstellationActivity : AppCompatActivity() {
             val sCol: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             val sRow: GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             var sGridParam: GridLayout.LayoutParams
-            val sBall = "ball_"+gSelLotto[i-1]
+            val sBall = "stroke_ball_" + gSelLotto[i-1]
             val sBtn = ImageButton(this)
 //            sBtn.setBackgroundResource(R.drawable.ball_1)
                 sBtn.setBackgroundResource(resources.getIdentifier(sBall,"drawable", packageName))

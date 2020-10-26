@@ -17,9 +17,13 @@ import com.example.lottopro.DataBase.PatternSelSql
 import com.example.lottopro.DataBase.SqlHelper
 import com.example.lottopro.Str.LottoNum
 import com.example.lottopro.Str.PatternSelNum
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.header_lotto.*
 import kotlinx.android.synthetic.main.pattern.*
+import kotlinx.android.synthetic.main.pattern_select_num.*
 import kotlinx.android.synthetic.main.select_lotto.*
+import kotlinx.android.synthetic.main.select_lotto.lottoGridLayout
 import kotlinx.android.synthetic.main.select_lotto.saveBtn
 import timber.log.Timber
 
@@ -35,6 +39,11 @@ class PatternSelectLottoActivity : AppCompatActivity() {
         gDb = SqlHelper(this)
         gPatternDb = PatternSelSql(this)
         setContentView(R.layout.pattern_select_num)
+
+        MobileAds.initialize(this) {}
+        var  mAdView = patternSelAdView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
