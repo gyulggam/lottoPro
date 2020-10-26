@@ -101,7 +101,7 @@ class SelectLottoActivity : AppCompatActivity() {
                         sIsClick = false
                     } else {
                         if (gMaxSelLotto === gSelLotto.size) {
-                            Toast.makeText(applicationContext, "어림없지 6개까지다 쒜끼야~", Toast.LENGTH_LONG).show();
+                            Toast.makeText(applicationContext, "최대 6개 까지 입니다.", Toast.LENGTH_LONG).show();
                             return@setOnClickListener
                         }
 
