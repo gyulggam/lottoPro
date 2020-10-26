@@ -37,10 +37,10 @@ class SelectLottoActivity : AppCompatActivity() {
 
         gDb = SqlHelper(this)
         setContentView(R.layout.select_lotto)
-
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         headerText.text = "직접로또"
 
         //mainText 색변경

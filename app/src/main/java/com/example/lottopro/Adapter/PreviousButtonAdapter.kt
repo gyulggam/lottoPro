@@ -1,6 +1,8 @@
 package com.example.lottopro.Adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -28,7 +30,16 @@ class PreviousButtonAdapter(private val aContext: Context, internal val aLottoNu
             if (view == null) {
                 sText = TextView(aContext)
                 sText.text = "${aLottoNum?.get(i)}"
-
+                sText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18F)
+                if(sTotalBtn > 2){
+                    sText.setTextColor(Color.parseColor("#5E4BE1"))
+                }else {
+                    if(i == 0){
+                        sText.setTextColor(Color.parseColor("#3F3D55"))
+                    }else if(i == 1){
+                        sText.setTextColor(Color.parseColor("#40CBEA"))
+                    }
+                }
             } else {
                 sText = view as TextView
             }

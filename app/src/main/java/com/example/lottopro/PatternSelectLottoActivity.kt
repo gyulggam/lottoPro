@@ -39,6 +39,7 @@ class PatternSelectLottoActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         var gMaxSelLotto = 45
         var gMaxLottoNum = 46

@@ -112,11 +112,10 @@ object LottoNumberMaker {
         arrayList = ArrayList()
         try {
             val doc: Document = Jsoup.connect("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+i).get()
-
             val docString = doc.text()
             val docJson = JSONObject(docString)
-
             var contents = docJson.get("bnusNo")
+            arrayList.add("+")
             arrayList.add(contents.toString()) // 보너스 번호
         } catch (e: IOException) {
             //e.printStackTrace();

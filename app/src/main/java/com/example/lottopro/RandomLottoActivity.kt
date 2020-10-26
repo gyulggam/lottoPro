@@ -42,7 +42,6 @@ class RandomLottoActivity : AppCompatActivity() {
 
         gDb = SqlHelper(this)
         setContentView(R.layout.random_lotto)
-
         //mainText 색변경
         var sMainStr = mainText.text.toString()
         var sSpannable = SpannableString(sMainStr)
@@ -57,6 +56,7 @@ class RandomLottoActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         headerText.text = "랜덤로또"
 
         MobileAds.initialize(this) {}

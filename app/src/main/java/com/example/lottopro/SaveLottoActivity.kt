@@ -33,7 +33,6 @@ class SaveLottoActivity : AppCompatActivity() {
 
         gDb = SqlHelper(this)
         setContentView(R.layout.save_lotto)
-
         drawSaveLotto()
 
         //mainText 색변경
@@ -53,6 +52,7 @@ class SaveLottoActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         headerText.text = "번호 내역"
 
         allDeleteBtn.setOnClickListener {

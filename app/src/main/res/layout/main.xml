@@ -90,7 +90,7 @@
                 android:background="@drawable/conner30"
                 android:textSize="14dp"
                 android:stateListAnimator="@null"
-                android:text="이전회차" >
+                android:text="이전회차">
             </Button>
 
         </LinearLayout>

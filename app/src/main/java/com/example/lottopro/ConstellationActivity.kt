@@ -31,6 +31,7 @@ class ConstellationActivity : AppCompatActivity() {
     private var gSelLotto = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         gDb = SqlHelper(this)
@@ -39,6 +40,7 @@ class ConstellationActivity : AppCompatActivity() {
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         headerText.text = "별자리로또"
 
         //mainText 색변경

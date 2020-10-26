@@ -51,10 +51,10 @@ class PatternLottoActivity : AppCompatActivity() {
         gDb = SqlHelper(this)
         gPatternDb = PatternSelSql(this)
         setContentView(R.layout.pattern)
-
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         headerText.text = "패턴로또"
 
         //mainText 색변경

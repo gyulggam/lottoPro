@@ -1,6 +1,10 @@
 package com.example.lottopro
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.GridView
@@ -8,8 +12,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import com.example.lottopro.Adapter.PreviousButtonAdapter
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.constellation.*
 import kotlinx.android.synthetic.main.header_lotto.*
+import kotlinx.android.synthetic.main.main.*
 import kotlinx.android.synthetic.main.previous_rounds.*
+import kotlinx.android.synthetic.main.previous_rounds.adView
 
 lateinit var gLottoGridView1:GridView
 lateinit var gLottoGridViewR1:GridView
@@ -39,7 +48,22 @@ class PreviousRoundsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.previous_rounds)
-      
+
+        //mainText 색변경
+        var sMainStr = Description.text.toString()
+        var sSpannable = SpannableString(sMainStr)
+        var sChangeStr = "이전 회차"
+        var sStartStr = sMainStr.indexOf(sChangeStr)
+        var sEndStr = sStartStr + sChangeStr.length
+        sSpannable.setSpan(ForegroundColorSpan(Color.parseColor("#5E4BE1")), sStartStr, sEndStr, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        Description.text = sSpannable
+        //mainText 색변경
+
+        MobileAds.initialize(this) {}
+        var  mAdView = adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         var gestureListener = MyGesture()
         var gesturedetector = GestureDetector(this, gestureListener)
 
@@ -165,6 +189,59 @@ class PreviousRoundsActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun upSwipe(){
+        // 5번째 회차 toInt
+        gLottoCount = gLottoCount?.toString()?.replace("[", "")
+        gLottoCount = gLottoCount?.replace("]", "")
+        gLottoCount = (gLottoCount?.toInt()?.plus(5)).toString()
+
+        println("gLottoCount ::::::::: ${gLottoCount}")
+
+        for(i in 0..5){
+
+            var sLottoCount=  (gLottoCount?.toInt()?.minus(i)).toString()
+            var sLottoNum = LottoNumberMaker.getPreNumber(sLottoCount.toString())?.toTypedArray()
+            var sLottoNum2 = LottoNumberMaker.getPreNumber(sLottoCount.toString())
+            println("sLottoNum :::::::::: ${sLottoNum2.toString()}")
+            var sLottoNumLast = LottoNumberMaker.getPreNumberBonus(sLottoCount.toString())?.toTypedArray()
+            var sLottoNumCount = LottoNumberMaker.getPreCount(sLottoCount.toString())
+
+            var sLottoNumCountR = sLottoNumCount?.toString()?.replace("[", "제 ")
+            sLottoNumCountR =sLottoNumCountR?.replace("]", "회")
+
+            var sAdapter = PreviousButtonAdapter(this, sLottoNum)
+            var sAdapterLast = PreviousButtonAdapter(this, sLottoNumLast)
+
+            if(i == 0){
+                gLottoGridView1.adapter = sAdapter
+                gLottoGridViewR1.adapter = sAdapterLast
+                gBannerTitle1.text = sLottoNumCountR
+            }
+            else if(i == 1){
+                gLottoGridView2.adapter = sAdapter
+                gLottoGridViewR2.adapter = sAdapterLast
+                gBannerTitle2.text = sLottoNumCountR
+            }
+            else if(i == 2){
+                gLottoGridView3.adapter = sAdapter
+                gLottoGridViewR3.adapter = sAdapterLast
+                gBannerTitle3.text = sLottoNumCountR
+            }
+            else if(i == 3){
+                gLottoGridView4.adapter = sAdapter
+                gLottoGridViewR4.adapter = sAdapterLast
+                gBannerTitle4.text = sLottoNumCountR
+            }
+            else if(i == 4){
+                gLottoGridView5.adapter = sAdapter
+                gLottoGridViewR5.adapter = sAdapterLast
+                gBannerTitle5.text = sLottoNumCountR
+            }
+        }
+    }
+
+
    private inner class MyGesture  : GestureDetector.OnGestureListener  {
 
         private val SWIPE_MIN_DISTANCE = 120
@@ -191,6 +268,8 @@ class PreviousRoundsActivity : AppCompatActivity() {
                         } else if (e2.y - e1.y > SWIPE_MIN_DISTANCE
                         ) {
                             println("내릴때 right swipe :::::::::::::::::::::::::::::::::::::::")
+
+                           upSwipe()
                         }
                     }
                 }

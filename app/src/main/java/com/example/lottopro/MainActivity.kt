@@ -27,13 +27,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.main)
-
         gDb = SqlHelper(this)
 
         val sToolbar = lottoHeader as Toolbar?
         setSupportActionBar(sToolbar)
         supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         MobileAds.initialize(this) {}
         var  mAdView = adView
@@ -56,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
         textView1.text = "$slottoApiData"
         textView2.text = "${slottoApiCount}회차"
-
         val sAddGridPram = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,

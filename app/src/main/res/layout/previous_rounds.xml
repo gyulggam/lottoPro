@@ -22,30 +22,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:orientation="vertical"
             >
             <TextView
+                android:id="@+id/Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="이전 회차 번호 입니다."/>
+                android:text="이전 회차 번호 입니다."
+                android:textSize="25dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="로또번호 최대 5회차까지 보여집니다."/>
+                android:text="로또번호 최대 5회차까지 보여집니다."
+                android:textSize="17dp"
+                android:textColor="#B0AFB6"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/top_banner1"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="#5E4BE1"
                 android:orientation="horizontal"
                 android:gravity="left|center"
@@ -56,21 +61,26 @@
                     android:layout_height="wrap_content"
                     android:text="bannerTitle1"
                     android:textColor="#FFFFFF"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="17dp"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="180dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp">
                     <GridView
                         android:id="@+id/LottoGridView1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:numColumns="6">
+                        android:layout_height="wrap_content"
+                        android:numColumns="6"
+                        android:layout_gravity="center"
+                        >
                     </GridView>
                 </LinearLayout>
                 <LinearLayout
@@ -81,9 +91,10 @@
                     >
                 <GridView
                     android:id="@+id/LottoGridViewR1"
-                    android:layout_width="60dp"
+                    android:layout_width="45dp"
                     android:layout_height="wrap_content"
-                    android:numColumns="2">
+                    android:numColumns="2"
+                    android:layout_gravity="center">
                 </GridView>
                 </LinearLayout>
 
@@ -95,13 +106,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/top_banner2"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="#5E4BE1"
                 android:orientation="horizontal"
                 android:gravity="left|center"
@@ -112,21 +123,25 @@
                     android:layout_height="wrap_content"
                     android:text="bannerTitle2"
                     android:textColor="#FFFFFF"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="17dp"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="180dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp">
                     <GridView
                         android:id="@+id/LottoGridView2"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:numColumns="6">
+                        android:layout_height="wrap_content"
+                        android:numColumns="6"
+                        android:layout_gravity="center">
                     </GridView>
                 </LinearLayout>
                 <LinearLayout
@@ -137,9 +152,10 @@
                     >
                     <GridView
                         android:id="@+id/LottoGridViewR2"
-                        android:layout_width="60dp"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
-                        android:numColumns="2">
+                        android:numColumns="2"
+                        android:layout_gravity="center">
                     </GridView>
                 </LinearLayout>
 
@@ -150,13 +166,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/top_banner3"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="#5E4BE1"
                 android:orientation="horizontal"
                 android:gravity="left|center"
@@ -167,21 +183,25 @@
                     android:layout_height="wrap_content"
                     android:text="bannerTitle3"
                     android:textColor="#FFFFFF"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="17dp"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="180dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp">
                     <GridView
                         android:id="@+id/LottoGridView3"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:numColumns="6">
+                        android:layout_height="wrap_content"
+                        android:numColumns="6"
+                        android:layout_gravity="center">
                     </GridView>
                 </LinearLayout>
                 <LinearLayout
@@ -192,9 +212,10 @@
                     >
                     <GridView
                         android:id="@+id/LottoGridViewR3"
-                        android:layout_width="60dp"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
-                        android:numColumns="2">
+                        android:numColumns="2"
+                        android:layout_gravity="center">
                     </GridView>
                 </LinearLayout>
             </LinearLayout>
@@ -203,38 +224,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/top_banner4"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="#5E4BE1"
                 android:orientation="horizontal"
                 android:gravity="left|center"
                 >
+
                 <TextView
                     android:id="@+id/bannerTitle4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
                     android:text="bannerTitle4"
                     android:textColor="#FFFFFF"
-                    />
+                    android:textSize="17dp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="180dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp">
                     <GridView
                         android:id="@+id/LottoGridView4"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:numColumns="6">
+                        android:layout_height="wrap_content"
+                        android:numColumns="6"
+                        android:layout_gravity="center">
                     </GridView>
                 </LinearLayout>
                 <LinearLayout
@@ -243,12 +268,13 @@
                     android:gravity="right"
                     android:layout_marginHorizontal="20dp"
                     >
+
                     <GridView
                         android:id="@+id/LottoGridViewR4"
-                        android:layout_width="60dp"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
-                        android:numColumns="2">
-                    </GridView>
+                        android:numColumns="2"
+                        android:layout_gravity="center"></GridView>
                 </LinearLayout>
 
 
@@ -258,38 +284,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/top_banner5"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:background="#5E4BE1"
-                android:orientation="horizontal"
                 android:gravity="left|center"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/bannerTitle5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
                     android:text="bannerTitle5"
                     android:textColor="#FFFFFF"
-                    />
+                    android:textSize="17dp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="180dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp">
                     <GridView
                         android:id="@+id/LottoGridView5"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:numColumns="6">
+                        android:layout_height="wrap_content"
+                        android:numColumns="6"
+                        android:layout_gravity="center">
                     </GridView>
                 </LinearLayout>
                 <LinearLayout
@@ -300,9 +329,10 @@
                     >
                     <GridView
                         android:id="@+id/LottoGridViewR5"
-                        android:layout_width="60dp"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
-                        android:numColumns="2">
+                        android:numColumns="2"
+                        android:layout_gravity="center">
                     </GridView>
                 </LinearLayout>
 
