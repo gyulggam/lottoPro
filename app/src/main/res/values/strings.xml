@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">로또메이커</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="admob_app_id">ca-app-pub-4822934848294126~8742775740</string>
+    <string name="banner_ad_unit_id">ca-app-pub-4822934848294126/8844694004</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

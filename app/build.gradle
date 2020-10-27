@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.lottopro"
+        applicationId "com.project.lottopro"
         minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
