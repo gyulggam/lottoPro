@@ -35,9 +35,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="로또번호 최대 5회차까지 보여집니다."
-                android:textSize="17dp"
-                android:textColor="#B0AFB6"/>
+                android:text="로또번호 최대 5회차까지 보여집니다.
+                            \n(위로 드래그시 이전 회차)"
+                android:textColor="#B0AFB6"
+                android:textSize="17dp" />
         </LinearLayout>
 
         <LinearLayout
