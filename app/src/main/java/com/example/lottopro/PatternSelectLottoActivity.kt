@@ -56,7 +56,11 @@ class PatternSelectLottoActivity : AppCompatActivity() {
         var gMaxRow = 5
         gPatternList = gPatternDb.gPatternSelNum
 
-        var sPatternSelectList = gPatternList[0].number?.split(',')
+        var sPatternSelectList : List<String>? = listOf("")
+
+        if (gPatternList.isNotEmpty()) {
+            sPatternSelectList = gPatternList[0].number?.split(',')
+        }
 
         lottoGridLayout.columnCount = gMaxCol
         lottoGridLayout.rowCount = gMaxRow

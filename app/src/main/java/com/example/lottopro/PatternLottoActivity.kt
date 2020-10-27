@@ -77,6 +77,7 @@ class PatternLottoActivity : AppCompatActivity() {
         //mainText 색변경
 
         var sPatternSelectNum = gPatternDb.gPatternSelNum
+        var sSelNumList : List<String>?
 
         var gMaxCol = 7
         var gMaxRow = 7
@@ -107,11 +108,11 @@ class PatternLottoActivity : AppCompatActivity() {
         sGridSpace.useDefaultMargins = true
 
         patSelNum.addView(sGridSpace)
+println("sPatternSelectNum[0].number:::: $sPatternSelectNum")
+        if (sPatternSelectNum != null && sPatternSelectNum.size !== 0) {
+            sSelNumList = sPatternSelectNum[0].number?.split(",")
 
-        var sSelNumList = sPatternSelectNum[0].number?.split(",")
-
-        if (sSelNumList != null) {
-            for((index, value) in sSelNumList.withIndex()) {
+            for((index, value) in sSelNumList!!.withIndex()) {
                 var sVal = value.toInt()
                 when(sVal) {
                     in 0..10 -> sOneList.add(sVal)
