@@ -108,7 +108,6 @@ class PatternLottoActivity : AppCompatActivity() {
         sGridSpace.useDefaultMargins = true
 
         patSelNum.addView(sGridSpace)
-println("sPatternSelectNum[0].number:::: $sPatternSelectNum")
         if (sPatternSelectNum != null && sPatternSelectNum.size !== 0) {
             sSelNumList = sPatternSelectNum[0].number?.split(",")
 

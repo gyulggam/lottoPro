@@ -26,7 +26,7 @@
                 android:text="랜덤으로 \n번호를 뽑아보세요!"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="60dp"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 android:textColor="#000000"
                 >
 
@@ -96,33 +96,27 @@
         <LinearLayout
             android:id="@+id/linearLayoutBottom"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:layout_constraintBottom_toTopOf="@+id/ad_view_container"
-            app:layout_constraintTop_toBottomOf="@+id/GridLayoutLayout3">
+            android:layout_height="35dp"
+            android:gravity="center">
             <Button
                 android:id="@+id/goResultButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:text="로또번호뽑기"
                 android:stateListAnimator="@null"
                 android:textColor="#000000"
-                android:background="@drawable/create_btn"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:background="@drawable/create_btn" />
 
             <Button
                 android:id="@+id/goSaveButton"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:text="번호저장하기"
+                android:layout_marginLeft="20dp"
                 android:textStyle="bold"
                 android:stateListAnimator="@null"
                 android:textColor="#ffffff"
-                android:background="@drawable/save_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:background="@drawable/save_button" />
         </LinearLayout>
     </LinearLayout>
 
