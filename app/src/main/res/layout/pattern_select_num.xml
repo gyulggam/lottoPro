@@ -73,6 +73,16 @@
                     android:background="@drawable/select_image"/>
             </LinearLayout>
 
+            <Button
+                android:id="@+id/allCheckBtn"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:text="전체 선택"
+                android:layout_marginTop="30dp"
+                android:textColor="#F2F2F2"
+                android:layout_gravity="start"
+                android:background="@drawable/save_button" />
+
             <GridLayout
                 android:id="@+id/lottoGridLayout"
                 android:layout_width="match_parent"

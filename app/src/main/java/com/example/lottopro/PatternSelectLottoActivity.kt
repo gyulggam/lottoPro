@@ -32,6 +32,7 @@ class PatternSelectLottoActivity : AppCompatActivity() {
     private lateinit var  gPatternDb: PatternSelSql
     private var gPatternList:List<PatternSelNum> = ArrayList<PatternSelNum>()
     private var gSelLotto = ArrayList<Int>()
+    private var gPatternSelectList : List<String>? = listOf("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,21 +51,45 @@ class PatternSelectLottoActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowCustomEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        var gMaxSelLotto = 45
-        var gMaxLottoNum = 46
         var gMaxCol = 9
         var gMaxRow = 5
         gPatternList = gPatternDb.gPatternSelNum
 
-        var sPatternSelectList : List<String>? = listOf("")
-
-        if (gPatternList.isNotEmpty()) {
-            sPatternSelectList = gPatternList[0].number?.split(',')
-        }
-
         lottoGridLayout.columnCount = gMaxCol
         lottoGridLayout.rowCount = gMaxRow
         saveBtn.text = "번호 저장"
+
+        drawLottoSelect()
+
+        saveBtn.setOnClickListener {
+            patSelectBtn()
+        }
+
+        viewBackBtn.setOnClickListener {
+            finish()
+        }
+
+        allCheckBtn.setOnClickListener {
+            gPatternSelectList = ArrayList<String>()
+            gSelLotto = ArrayList<Int>()
+
+            for(i in 1..46) {
+                (gPatternSelectList as ArrayList<String>).add(i.toString())
+            }
+
+            drawLottoSelect()
+        }
+    }
+
+    private fun drawLottoSelect() {
+        var gMaxSelLotto = 45
+        var gMaxLottoNum = 46
+
+        lottoGridLayout.removeAllViews()
+
+        if (gPatternList.isNotEmpty()) {
+            gPatternSelectList = gPatternList[0].number?.split(',')
+        }
 
         for (i in 1 until gMaxLottoNum) {
             var sIsClick = false
@@ -74,7 +99,7 @@ class PatternSelectLottoActivity : AppCompatActivity() {
             val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
             var sGridParam : GridLayout.LayoutParams
 
-            sIsClick = sPatternSelectList?.indexOf(i.toString()) != -1
+            sIsClick = gPatternSelectList?.indexOf(i.toString()) != -1
 
             val sBtn = ImageButton(this).apply {
                 this.setOnClickListener {
@@ -88,7 +113,7 @@ class PatternSelectLottoActivity : AppCompatActivity() {
                         sIsClick = false
                     } else {
                         if (gMaxSelLotto === gSelLotto.size) {
-                            Toast.makeText(applicationContext, "어림없지 45개까지다 쒜끼야~", Toast.LENGTH_LONG).show();
+                            Toast.makeText(applicationContext, "선택은 45개 까지입니다.", Toast.LENGTH_LONG).show();
                             return@setOnClickListener
                         }
 
@@ -104,7 +129,7 @@ class PatternSelectLottoActivity : AppCompatActivity() {
                 }
             }
 
-            if(sPatternSelectList?.indexOf(i.toString()) != -1) {
+            if(gPatternSelectList?.indexOf(i.toString()) != -1) {
                 sBtn.setBackgroundResource(resources.getIdentifier(sBall, "drawable", packageName))
                 gSelLotto.add(i.toInt())
             } else {
@@ -117,14 +142,6 @@ class PatternSelectLottoActivity : AppCompatActivity() {
             )
             sGridParam = GridLayout.LayoutParams(sRow, sCol)
             lottoGridLayout.addView(sBtn, sGridParam)
-        }
-
-        saveBtn.setOnClickListener {
-            patSelectBtn()
-        }
-
-        viewBackBtn.setOnClickListener {
-            finish()
         }
     }
 

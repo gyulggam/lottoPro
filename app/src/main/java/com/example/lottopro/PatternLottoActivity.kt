@@ -37,6 +37,7 @@ import kotlinx.android.synthetic.main.pattern.secondDown
 import kotlinx.android.synthetic.main.pattern.secondUp
 import kotlinx.android.synthetic.main.pattern.thirdDown
 import kotlinx.android.synthetic.main.pattern.thirdUp
+import kotlinx.android.synthetic.main.pattern_select_num.*
 import kotlinx.android.synthetic.main.select_lotto.*
 import org.json.JSONObject
 import timber.log.Timber
@@ -47,6 +48,7 @@ class PatternLottoActivity : AppCompatActivity() {
     private lateinit var gDb: SqlHelper
     private lateinit var gPatternDb: PatternSelSql
     private var gIntResultLotto = ArrayList<Int>()
+    internal var gPatternSelectNum:List<PatternSelNum> = ArrayList<PatternSelNum>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,15 +78,9 @@ class PatternLottoActivity : AppCompatActivity() {
         patTopLayoutText.text = sSpannable
         //mainText 색변경
 
-        var sPatternSelectNum = gPatternDb.gPatternSelNum
+        gPatternSelectNum = gPatternDb.gPatternSelNum
         var sSelNumList : List<String>?
 
-        var gMaxCol = 7
-        var gMaxRow = 7
-        val sGridSpace: GridLayout = GridLayout(this)
-        val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
-        val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
-        var sGridSpacePram : GridLayout.LayoutParams
         var sStr = firstNum.text.toString()
         var sFirstNum = sStr.toInt()
         sStr = secondNum.text.toString()
@@ -103,13 +99,10 @@ class PatternLottoActivity : AppCompatActivity() {
         var sTreeList = ArrayList<Int>()
         var sFourList = ArrayList<Int>()
 
-        sGridSpace.columnCount = gMaxCol
-        sGridSpace.rowCount = gMaxRow
-        sGridSpace.useDefaultMargins = true
+        drawSelectLotto()
 
-        patSelNum.addView(sGridSpace)
-        if (sPatternSelectNum != null && sPatternSelectNum.size !== 0) {
-            sSelNumList = sPatternSelectNum[0].number?.split(",")
+        if (gPatternSelectNum != null && gPatternSelectNum.size !== 0) {
+            sSelNumList = gPatternSelectNum[0].number?.split(",")
 
             for((index, value) in sSelNumList!!.withIndex()) {
                 var sVal = value.toInt()
@@ -123,35 +116,6 @@ class PatternLottoActivity : AppCompatActivity() {
             }
         }
 
-        if (sPatternSelectNum != null) {
-            for((index, value) in sPatternSelectNum.withIndex()) {
-                var sStr = value.number
-                var sSelectList : Array<String>
-
-                if (sStr !== null) {
-                    sSelectList= sStr?.split(",").toTypedArray()
-
-                    for (selVal in sSelectList) {
-                        var sBall = "pattern_un_$selVal"
-                        val sBtn = ImageButton(this)
-
-                        sBtn.setBackgroundResource(
-                            resources.getIdentifier(sBall, "drawable", packageName)
-                        )
-                        sBtn.layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        )
-
-                        sGridSpacePram = GridLayout.LayoutParams(sRow, sCol)
-                        sGridSpace.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT)
-                        sGridSpace.addView(sBtn, sGridSpacePram)
-                    }
-                }
-            }
-        }
-
         patSelBtn.setOnClickListener{
             val sIntent = Intent(this@PatternLottoActivity, PatternSelectLottoActivity::class.java  )
             startActivity(sIntent);
@@ -160,6 +124,14 @@ class PatternLottoActivity : AppCompatActivity() {
         patSelBtnLay.setOnClickListener{
             val sIntent = Intent(this@PatternLottoActivity, PatternSelectLottoActivity::class.java  )
             startActivity(sIntent);
+        }
+
+        patDelBtn.setOnClickListener{
+            deleteBtn()
+        }
+
+        patDelBtnLay.setOnClickListener{
+            deleteBtn()
         }
 
         patternSaveBtn.setOnClickListener {
@@ -267,7 +239,65 @@ class PatternLottoActivity : AppCompatActivity() {
 
         createBtn.setOnClickListener {
             var sStr = "${sFirstNum},${sSecondNum},${sThirdNum},${sFourthNum},${sFiveNum}"
-            createPatternLotto(sPatternSelectNum, sStr)
+            createPatternLotto(gPatternSelectNum, sStr)
+        }
+    }
+
+    private fun deleteBtn() {
+        for (value in gPatternSelectNum) {
+            val sSelNum = PatternSelNum(value.id, "")
+            gPatternDb.deletePatternSel(sSelNum)
+
+            drawSelectLotto()
+        }
+    }
+
+    private fun drawSelectLotto() {
+        if (gPatternSelectNum != null) {
+            patSelNum.removeAllViews()
+
+            val sGridSpace: GridLayout = GridLayout(this)
+            val sCol : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            val sRow : GridLayout.Spec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1F)
+            var sGridSpacePram : GridLayout.LayoutParams
+
+            var gMaxCol = 7
+            var gMaxRow = 7
+
+            gPatternSelectNum = gPatternDb.gPatternSelNum
+
+            for((index, value) in gPatternSelectNum.withIndex()) {
+                var sStr = value.number
+                var sSelectList : Array<String>
+
+                if (sStr !== null) {
+                    sSelectList= sStr?.split(",").toTypedArray()
+
+                    for (selVal in sSelectList) {
+                        var sBall = "pattern_un_$selVal"
+                        val sBtn = ImageButton(this)
+
+                        sBtn.setBackgroundResource(
+                            resources.getIdentifier(sBall, "drawable", packageName)
+                        )
+                        sBtn.layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+
+                        sGridSpacePram = GridLayout.LayoutParams(sRow, sCol)
+                        sGridSpace.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT)
+                        sGridSpace.addView(sBtn, sGridSpacePram)
+                    }
+                }
+            }
+
+            sGridSpace.columnCount = gMaxCol
+            sGridSpace.rowCount = gMaxRow
+            sGridSpace.useDefaultMargins = true
+
+            patSelNum.addView(sGridSpace)
         }
     }
 
@@ -285,6 +315,11 @@ class PatternLottoActivity : AppCompatActivity() {
     }
 
     private fun createPatternLotto(aSelectArray : List<PatternSelNum>, aPatternStr : String) {
+        if (aSelectArray === null || aSelectArray.size === 0) {
+            Toast.makeText(applicationContext, "사용할 번호를 추가해 주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         var sSelNumList = aSelectArray[0].number?.split(",")
         var sPatternNumList = aPatternStr.split(",")
         var sOneList = ArrayList<Int>()
@@ -294,11 +329,6 @@ class PatternLottoActivity : AppCompatActivity() {
         var sFourList = ArrayList<Int>()
         var sPatternJson = JSONObject()
         gIntResultLotto = ArrayList<Int>()
-
-        if (sSelNumList!![0] == "") {
-            Toast.makeText(applicationContext, "사용할 번호를 선택해 주세요", Toast.LENGTH_SHORT).show()
-            return
-        }
 
         if (sSelNumList !== null) {
             for((index, value) in sSelNumList.withIndex()) {

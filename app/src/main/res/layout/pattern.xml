@@ -57,7 +57,7 @@
                 android:id="@+id/patBtnLine"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_gravity="center|center_horizontal">
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/pattern_layout_border"
                 android:orientation="vertical">
 
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingVertical="8dp"
-                        android:text="적용 숫자"
+                        android:text="사용할 숫자"
                         android:textStyle="bold"
                         android:textColor="#5E4BE1"
                         android:textSize="17dp"/>
@@ -117,8 +117,8 @@
                         android:orientation="horizontal"
                         android:id="@+id/patSelBtnLay">
                         <Button
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:id="@+id/patSelBtn"
                             android:background="@drawable/plus_btn">
                         </Button>
@@ -127,7 +127,28 @@
                             android:layout_height="30dp"
                             android:gravity="bottom"
                             android:textStyle="bold"
-                            android:text="추가하기">
+                            android:text="추가">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/patDelBtnLay">
+                        <Button
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:id="@+id/patDelBtn"
+                            android:background="@drawable/minus_btn">
+                        </Button>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="bottom"
+                            android:textStyle="bold"
+                            android:text="삭제">
                         </TextView>
                     </LinearLayout>
                 </LinearLayout>
@@ -147,11 +168,37 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="적용 패턴"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:paddingVertical="5dp"
+                    android:textColor="#5E4BE1">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(각 자릿수가 나올 개수를 정해주세요)"
+                    android:layout_marginLeft="5dp"
+                    android:paddingVertical="5dp"
+                    android:textColor="#bbbbbb">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/patSelPatternLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
                 <LinearLayout
