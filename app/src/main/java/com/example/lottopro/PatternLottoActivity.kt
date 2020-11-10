@@ -366,8 +366,10 @@ class PatternLottoActivity : AppCompatActivity() {
                 sValue  = sOneList[sRandom].toInt()
             }
 
-            while(gIntResultLotto.indexOf(sValue) > -1) {
-                sValue++
+            while (gIntResultLotto.indexOf(sValue) > -1) {
+                sOneList.remove(sValue)
+                sRandom = Random().nextInt(sOneList.size)
+                sValue = sOneList[sRandom].toInt()
             }
 
             gIntResultLotto.add(sValue)
@@ -386,8 +388,10 @@ class PatternLottoActivity : AppCompatActivity() {
                 sValue = sTenList[sRandom].toInt()
             }
 
-            while(gIntResultLotto.indexOf(sValue) > -1) {
-                sValue++
+            while (gIntResultLotto.indexOf(sValue) > -1) {
+                sTenList.remove(sValue)
+                sRandom = Random().nextInt(sTenList.size)
+                sValue = sTenList[sRandom].toInt()
             }
 
             gIntResultLotto.add(sValue)
@@ -406,8 +410,10 @@ class PatternLottoActivity : AppCompatActivity() {
                 sValue = sTwoList[sRandom].toInt()
             }
 
-            while(gIntResultLotto.indexOf(sValue) > -1) {
-                sValue++
+            while (gIntResultLotto.indexOf(sValue) > -1) {
+                sTwoList.remove(sValue)
+                sRandom = Random().nextInt(sTwoList.size)
+                sValue = sTwoList[sRandom].toInt()
             }
 
             gIntResultLotto.add(sValue)
@@ -426,8 +432,10 @@ class PatternLottoActivity : AppCompatActivity() {
                 sValue = sTreeList[sRandom].toInt()
             }
 
-            while(gIntResultLotto.indexOf(sValue) > -1) {
-                sValue++
+            while (gIntResultLotto.indexOf(sValue) > -1) {
+                sTreeList.remove(sValue)
+                sRandom = Random().nextInt(sTreeList.size)
+                sValue = sTreeList[sRandom].toInt()
             }
 
             gIntResultLotto.add(sValue)
@@ -446,8 +454,10 @@ class PatternLottoActivity : AppCompatActivity() {
                 sValue = sFourList[sRandom].toInt()
             }
 
-            while(gIntResultLotto.indexOf(sValue) > -1) {
-                sValue++
+            while (gIntResultLotto.indexOf(sValue) > -1) {
+                sFourList.remove(sValue)
+                sRandom = Random().nextInt(sFourList.size)
+                sValue = sFourList[sRandom].toInt()
             }
 
             gIntResultLotto.add(sValue)
